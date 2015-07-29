@@ -94,12 +94,50 @@
 								echo anchor(base_url().'orders/show/'.$row->id_orden, $row->id_orden, 'target="new"');
 							elseif ($field['field'] == 'estado'):
 								?>
-								<div style="width: 117px;">
-									<span class="label label-success" data-toggle="tooltip" data-placement="top" title="Orden de compra">1</span>
-									<span class="label label-success" data-toggle="tooltip" data-placement="top" title="Voucher">2</span>
-									<span class="label label-success" data-toggle="tooltip" data-placement="top" title="Guía de entrega">3</span>
-									<span class="label label-danger" data-toggle="tooltip" data-placement="top" title="Tarjeta y sobre">4</span>
-								</div><?php
+								<div style="width: 119px;">
+								<?php
+								if (($row->user_impresionOC == "") && ($row->horafecha_impresionOC == "")) {
+									?>
+										<span class="label label-danger" data-toggle="tooltip" data-placement="top" title="Orden de compra">OC</span>
+						            <?php
+								} else {
+									?>
+										<span class="label label-success" data-toggle="tooltip" data-placement="top" title="Orden de compra">OC</span>
+						            <?php
+								}
+
+								if (($row->user_impresionV == "") && ($row->horafecha_impresionV == "")) {
+									?>
+										<span class="label label-danger" data-toggle="tooltip" data-placement="top" title="Voucher">V</span>
+						            <?php
+								} else {
+									?>
+										<span class="label label-success" data-toggle="tooltip" data-placement="top" title="Voucher">V</span>
+						            <?php
+								}
+
+								if (($row->user_impresionGE == "") && ($row->horafecha_impresionGE == "")) {
+									?>
+										<span class="label label-danger" data-toggle="tooltip" data-placement="top" title="Guía de entrega">GE</span>
+						            <?php
+								} else {
+									?>
+										<span class="label label-success" data-toggle="tooltip" data-placement="top" title="Guía de entrega">GE</span>
+						            <?php
+								}
+
+								if (($row->user_impresionST == "") && ($row->horafecha_impresionST == "")) {
+									?>
+										<span class="label label-danger" data-toggle="tooltip" data-placement="top" title="Tarjeta y sobre">TS</span>
+						            <?php
+								} else {
+									?>
+										<span class="label label-success" data-toggle="tooltip" data-placement="top" title="Tarjeta y sobre">TS</span>
+						            <?php
+								}
+								?>								
+								</div>
+								<?php
 							else:
 								echo SiteHelpers::gridDisplay($row->$field['field'] , $field['field'] , $conn ); ?>
 							<?php endif; ?>

@@ -1,3 +1,9 @@
+<style> 
+.form-horizontal .form-group {
+	margin-right: 400px;
+	margin-left: none;
+}
+</style>
 <div class="page-content row">
     <!-- Page header -->
 <div class="page-header">
@@ -30,7 +36,9 @@
 				<li class=""><a href="#Productos" data-toggle="tab">Productos</a></li>
 				<li class=""><a href="#Facturación" data-toggle="tab">Facturación</a></li>
 				</ul><div class="tab-content"><div class="tab-pane m-t active" id="Orden"> 
-									
+				
+
+
 								  <div class="form-group  " >
 									<label for="Fecha de Pago" class=" control-label col-md-4 text-left"> Fecha de Pago </label>
 									<div class="col-md-8">
@@ -39,7 +47,7 @@
 				style='width:150px !important;'	   /> <br />
 									  <i> <small></small></i>
 									 </div> 
-								  </div> 					
+								  </div>				
 								  <div class="form-group  " >
 									<label for="Estado" class=" control-label col-md-4 text-left"> Estado </label>
 									<div class="col-md-8">
@@ -174,8 +182,12 @@
 			</div>
 			
 			<div class="tab-pane m-t " id="Cliente-Destinatario"> 
-									
-								  <div class="form-group  " >
+				<fieldset>
+					<div class="panel panel-primary">
+						<legend>
+							<div class="alert alert-success" role="alert" style="font-size: 13px; margin-left: 15px; margin-right: 15px;">Cliente:</div>
+						</legend>
+						 		  <div class="form-group  " >
 									<label for="Fecha de Entrega" class=" control-label col-md-4 text-left"> Fecha de Entrega </label>
 									<div class="col-md-8">
 									  
@@ -190,8 +202,8 @@
 									  <input type='text' class='form-control' placeholder='' value='<?php echo $row['des_hora_entrega'];?>' name='des_hora_entrega'   /> <br />
 									  <i> <small></small></i>
 									 </div> 
-								  </div> 					
-								  <div class="form-group  " >
+								  </div> 		
+								  <div class="form-group">
 									<label for="Id Cliente" class=" control-label col-md-4 text-left"> Id Cliente </label>
 									<div class="col-md-8">
 									  <input type='text' class='form-control' placeholder='' value='<?php echo $row['cli_id_cliente'];?>' name='cli_id_cliente'   /> <br />
@@ -247,6 +259,10 @@
 									  <i> <small></small></i>
 									 </div> 
 								  </div> 					
+					</div>
+				</fieldset>							
+								  			
+								  
 								  <div class="form-group  " >
 									<label for="Ante Nombre" class=" control-label col-md-4 text-left"> Ante Nombre </label>
 									<div class="col-md-8">

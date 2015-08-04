@@ -1,24 +1,24 @@
 <?php if (!defined('BASEPATH')) exit('No direct script access allowed');
 
-class Orders extends SB_Controller 
+class Client extends SB_Controller 
 {
 
 	protected $layout 	= "layouts/main";
-	public $module 		= 'orders';
+	public $module 		= 'client';
 	public $per_page	= '10';
 
 	function __construct() {
 		parent::__construct();
 		
-		$this->load->model('ordersmodel');
-		$this->model = $this->ordersmodel;
+		$this->load->model('clientmodel');
+		$this->model = $this->clientmodel;
 		
 		$this->info = $this->model->makeInfo( $this->module);
 		$this->access = $this->model->validAccess($this->info['id']);	
 		$this->data = array_merge( $this->data, array(
 			'pageTitle'	=> 	$this->info['title'],
 			'pageNote'	=>  $this->info['note'],
-			'pageModule'	=> 'orders',
+			'pageModule'	=> 'client',
 		));
 		
 		if(!$this->session->userdata('logged_in')) redirect('user/login',301);
@@ -34,7 +34,7 @@ class Orders extends SB_Controller
 		}	
 		  
 		// Filter sort and order for query 
-		$sort = (!is_null($this->input->get('sort', true)) ? $this->input->get('sort', true) : 'id_orden'); 
+		$sort = (!is_null($this->input->get('sort', true)) ? $this->input->get('sort', true) : 'id_cliente'); 
 		$order = (!is_null($this->input->get('order', true)) ? $this->input->get('order', true) : 'asc');
 		// End Filter sort and order for query 
 		// Filter Search for query		
@@ -74,7 +74,7 @@ class Orders extends SB_Controller
 		$this->data['access']		= $this->access;
 		// Render into template
 		
-		$this->data['content'] = $this->load->view('orders/index',$this->data, true );
+		$this->data['content'] = $this->load->view('client/index',$this->data, true );
 		
     	$this->load->view('layouts/main', $this->data );
     
@@ -94,11 +94,11 @@ class Orders extends SB_Controller
 		{
 			$this->data['row'] =  $row;
 		} else {
-			$this->data['row'] = $this->model->getColumnTable('ordenes'); 
+			$this->data['row'] = $this->model->getColumnTable('clientes'); 
 		}
 		
 		$this->data['id'] = $id;
-		$this->data['content'] =  $this->load->view('orders/view', $this->data ,true);	  
+		$this->data['content'] =  $this->load->view('client/view', $this->data ,true);	  
 		$this->load->view('layouts/main',$this->data);
 	}
   
@@ -115,11 +115,11 @@ class Orders extends SB_Controller
 		{
 			$this->data['row'] =  $row;
 		} else {
-			$this->data['row'] = $this->model->getColumnTable('ordenes'); 
+			$this->data['row'] = $this->model->getColumnTable('clientes'); 
 		}
 	
 		$this->data['id'] = $id;
-		$this->data['content'] = $this->load->view('orders/form',$this->data, true );		
+		$this->data['content'] = $this->load->view('client/form',$this->data, true );		
 	  	$this->load->view('layouts/main', $this->data );
 	
 	}
@@ -132,9 +132,9 @@ class Orders extends SB_Controller
 		if( $this->form_validation->run() )
 		{
 			$data = $this->validatePost();
-			$ID = $this->model->insertRow($data , $this->input->get_post( 'id_orden' , true ));
+			$ID = $this->model->insertRow($data , $this->input->get_post( 'id_cliente' , true ));
 			// Input logs
-			if( $this->input->get( 'id_orden' , true ) =='')
+			if( $this->input->get( 'id_cliente' , true ) =='')
 			{
 				$this->inputLogs("New Entry row with ID : $ID  , Has Been Save Successfull");
 			} else {
@@ -144,9 +144,9 @@ class Orders extends SB_Controller
 			$this->session->set_flashdata('message',SiteHelpers::alert('success'," Data has been saved succesfuly !"));
 			if($this->input->post('apply'))
 			{
-				redirect( 'orders/add/'.$ID,301);
+				redirect( 'client/add/'.$ID,301);
 			} else {
-				redirect( 'orders',301);
+				redirect( 'client',301);
 			}			
 			
 			
@@ -171,6 +171,7 @@ class Orders extends SB_Controller
 		$this->inputLogs("ID : ".implode(",",$this->input->post( 'id' , true ))."  , Has Been Removed Successfull");
 		$this->session->set_flashdata('message',
 			SiteHelpers::alert('success',"ID : ".implode(",",$this->input->post( 'id' , true ))."  , Has Been Removed Successfull"));
-		Redirect('orders',301);
+		Redirect('client',301);
 	}
+ }
 }

@@ -206,7 +206,7 @@
 								  <div class="form-group">
 									<label for="Id Cliente" class=" control-label col-md-4 text-left"> Id Cliente </label>
 									<div class="col-md-8">
-									  <input type='text' class='form-control' placeholder='' value='<?php echo $row['cli_id_cliente'];?>' name='cli_id_cliente'   /> <br />
+									  <input type='text' class='form-control' placeholder='' value='<?php echo $row['cli_id_cliente'];?>' name='cli_id_cliente' />Buscar: <i class="fa fa-search" onClick="window.open('search_client','popuppage','width=850,toolbar=1,resizable=1,scrollbars=yes,height=700,top=100,left=100');"></i><br />
 									  <i> <small></small></i>
 									 </div> 
 								  </div> 					
@@ -261,18 +261,24 @@
 								  </div> 					
 					</div>
 				</fieldset>							
-								  			
-								  
-								  <div class="form-group  " >
-									<label for="Ante Nombre" class=" control-label col-md-4 text-left"> Ante Nombre </label>
-									<div class="col-md-8">
-									  <input type='text' class='form-control' placeholder='' value='<?php echo $row['des_ante_nombre'];?>' name='des_ante_nombre'   /> <br />
-									  <i> <small></small></i>
-									 </div> 
-								  </div> 					
+				<fieldset>
+					<div class="panel panel-primary">
+						<legend>
+							<div class="alert alert-success" role="alert" style="font-size: 13px; margin-left: 15px; margin-right: 15px;">Destinatario:</div>
+						</legend>								   							
 								  <div class="form-group  " >
 									<label for="Nombre" class=" control-label col-md-4 text-left"> Nombre </label>
 									<div class="col-md-8">
+										<?php $des_ante_nombre = explode(',',$row['des_ante_nombre']);
+										$des_ante_nombre_opt = array( 'Srta.'=>'Srta.','Sra.'=>'Sra.','Sr.'=>'Sr.','Flia.'=>'Flia.','Sres.'=>'Sres.','RETIRA'=>'RETIRA','Dra.'=>'Dra.','Mrs.'=>'Mrs.','Mr.'=>'Mr.','MATRIMONIO'=>'MATRIMONIO','Dr.'=>'Dr.','Familia'=>'Familia','Mrs. & Mr.'=>'Mrs. & Mr.','Srtas.'=>'Srtas.','Miss'=>'Miss','Ms.'=>'Ms.','Mr. & Mrs.'=>'Mr. & Mrs.','Párvulo'=>'Párvulo','Niño'=>'Niño','Sras.'=>'Sras.','Prvl.'=>'Prvl.','S.'=>'S.','Don'=>'Don','Cabo 1°'=>'Cabo 1°','RETIRAN'=>'RETIRAN','Sra. y Sr.'=>'Sra. y Sr.','Profesora'=>'Profesora','Madre'=>'Madre','Tía'=>'Tía','Family'=>'Family','Reverendo'=>'Reverendo','Tías'=>'Tías','Novia'=>'Novia','Señor'=>'Señor','Lic.'=>'Lic.','Mmes.'=>'Mmes.'); ?>
+										<select name='des_ante_nombre' rows='5'   class='select2 '> 
+											<?php 
+											foreach($des_ante_nombre_opt as $key=>$val)
+											{
+												echo "<option  value ='$key' ".($row['des_ante_nombre'] == $key ? " selected='selected' " : '' ).">$val</option>"; 						
+											}						
+											?>
+										</select><br>
 									  <input type='text' class='form-control' placeholder='' value='<?php echo $row['des_nombre'];?>' name='des_nombre'   /> <br />
 									  <i> <small></small></i>
 									 </div> 
@@ -308,8 +314,7 @@
 								  <div class="form-group  " >
 									<label for="País" class=" control-label col-md-4 text-left"> País </label>
 									<div class="col-md-8">
-									  <select name='des_pais' rows='5' id='des_pais' code='{$des_pais}' 
-							class='select2 '    ></select> <br />
+										<input type='text' class='form-control' placeholder='' value='<?php echo $row['des_pais'];?>' name='des_pais'   /> <br />									  
 									  <i> <small></small></i>
 									 </div> 
 								  </div> 					
@@ -327,6 +332,8 @@
 									  <i> <small></small></i>
 									 </div> 
 								  </div> 
+								  </div>
+				</fieldset>
 			</div>
 			
 			<div class="tab-pane m-t " id="Productos"> 
@@ -437,7 +444,7 @@
 									<div class="col-md-8">
 									  
 					<?php $tar_vencimiento_mes = explode(',',$row['tar_vencimiento_mes']);
-					$tar_vencimiento_mes_opt = array( '01' => 'Enero' ,  '02' => 'Febrero' ,  '03' => 'Marzo' ,  '04' => 'Abril' ,  '05' => 'Mayo' ,  '06' => 'Junio' ,  '07' => 'Julio' ,  '08' => 'Agosto' ,  '09' => 'Septiembre' ,  '10' => 'Octubre' , ); ?>
+					$tar_vencimiento_mes_opt = array( '01' => 'Enero' ,  '02' => 'Febrero' ,  '03' => 'Marzo' ,  '04' => 'Abril' ,  '05' => 'Mayo' ,  '06' => 'Junio' ,  '07' => 'Julio' ,  '08' => 'Agosto' ,  '09' => 'Septiembre' ,  '10' => 'Octubre' ,  '11' => 'Noviembre'  ,  '12' => 'Diciembre' ); ?>
 					<select name='tar_vencimiento_mes' rows='5'   class='select2 '  > 
 						<?php 
 						foreach($tar_vencimiento_mes_opt as $key=>$val)
@@ -453,7 +460,13 @@
 									<div class="col-md-8">
 									  
 					<?php $tar_vencimiento_ano = explode(',',$row['tar_vencimiento_ano']);
-					$tar_vencimiento_ano_opt = array( '2000' => '2000' ,  '2001' => '2001' , ); ?>
+					$tar_vencimiento_ano_opt = array(); 
+					$curYear = date("Y");
+					        $limit = 10;
+					        for ($x = $curYear; $x < $curYear + $limit; $x++) {
+					            $tar_vencimiento_ano_opt[$x] = $x;
+					        }
+					?>
 					<select name='tar_vencimiento_ano' rows='5'   class='select2 '  > 
 						<?php 
 						foreach($tar_vencimiento_ano_opt as $key=>$val)

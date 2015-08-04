@@ -1,8 +1,3 @@
-  <style>
-  .label-success {
-    background-color: #5cb85c;
-  }
-  </style>
   <?php usort($tableGrid, "SiteHelpers::_sort"); ?>
   <div class="page-content row">
     <!-- Page header -->
@@ -22,7 +17,7 @@
 	<div class="page-content-wrapper m-t">
     <div class="toolbar-line ">		
 		<?php if($this->access['is_add'] ==1) : ?>
-		<a href="<?php echo site_url('orders/add') ?>" class="tips btn btn-xs btn-info"  title="<?php echo $this->lang->line('core.btn_new'); ?>">
+		<a href="<?php echo site_url('client/add') ?>" class="tips btn btn-xs btn-info"  title="<?php echo $this->lang->line('core.btn_new'); ?>">
 		<i class="fa fa-plus"></i>&nbsp;<?php echo $this->lang->line('core.btn_new'); ?> </a>
 		<?php endif;
 		if($this->access['is_remove'] ==1) : ?>		
@@ -30,11 +25,11 @@
 		<i class="fa fa-trash-o"></i>&nbsp;<?php echo $this->lang->line('core.btn_remove'); ?> </a>
 		<?php endif;
 		if($this->access['is_excel'] ==1) : ?>	
-		<a href="<?php echo site_url('orders/download') ?>" class="tips btn btn-xs btn-default" title="<?php echo $this->lang->line('core.btn_download'); ?>">
+		<a href="<?php echo site_url('client/download') ?>" class="tips btn btn-xs btn-default" title="<?php echo $this->lang->line('core.btn_download'); ?>">
 		<i class="fa fa-download"></i>&nbsp;<?php echo $this->lang->line('core.btn_download'); ?></a>
 		<?php endif;
 		if($this->session->userdata('gid') ==1) : ?>	
-		<a href="<?php echo site_url('sximo/module/config/orders') ?>" class="tips btn btn-xs btn-default"  title="<?php echo $this->lang->line('core.btn_config'); ?>">
+		<a href="<?php echo site_url('sximo/module/config/client') ?>" class="tips btn btn-xs btn-default"  title="<?php echo $this->lang->line('core.btn_config'); ?>">
 		<i class="fa fa-cog"></i>&nbsp;<?php echo $this->lang->line('core.btn_config'); ?></a>
 		<?php endif; ?>		
 
@@ -45,7 +40,7 @@
 	<div class="sbox-content"> 	
 
 	<?php echo $this->session->flashdata('message');?>
-	 <form action='<?php echo site_url('orders/destroy') ?>' class='form-horizontal' id ='SximoTable' method="post" >
+	 <form action='<?php echo site_url('client/destroy') ?>' class='form-horizontal' id ='SximoTable' method="post" >
 	 <div class="table-responsive">
     <table class="table table-striped ">
         <thead>
@@ -81,7 +76,7 @@
 			<?php foreach ( $rowData as $i => $row ) : ?>
                 <tr>
 					<td width="50"> <?php echo ($i+1+$page) ?> </td>
-					<td width="50"><input type="checkbox" class="ids" name="id[]" value="<?php echo $row->id_orden ?>" />  </td>
+					<td width="50"><input type="checkbox" class="ids" name="id[]" value="<?php echo $row->id_cliente ?>" />  </td>
 				 <?php foreach ( $tableGrid as $j => $field ) : ?>
 					 <?php if($field['view'] =='1'): ?>
 					 <td>
@@ -89,60 +84,8 @@
 							<?php echo SiteHelpers::showUploadedFile($row->$field['field'] , $field['attribute']['image']['path'] ) ?>
 						<?php else: ?>
 							<?php 
-							$conn = (isset($field['conn']) ? $field['conn'] : array() ) ;		
-							if ($field['field'] == 'id_orden'):
-								echo anchor(base_url().'orders/show/'.$row->id_orden, $row->id_orden, 'target="new"');
-							elseif ($field['field'] == 'estado'):
-								?>
-								<div style="width: 119px;">
-								<?php
-								if (($row->user_impresionOC == "") && ($row->horafecha_impresionOC == "")) {
-									?>
-										<span class="label label-danger" data-toggle="tooltip" data-placement="top" title="Orden de compra">OC</span>
-						            <?php
-								} else {
-									?>
-										<span class="label label-success" data-toggle="tooltip" data-placement="top" title="Orden de compra">OC</span>
-						            <?php
-								}
-
-								if (($row->user_impresionV == "") && ($row->horafecha_impresionV == "")) {
-									?>
-										<span class="label label-danger" data-toggle="tooltip" data-placement="top" title="Voucher">V</span>
-						            <?php
-								} else {
-									?>
-										<span class="label label-success" data-toggle="tooltip" data-placement="top" title="Voucher">V</span>
-						            <?php
-								}
-
-								if (($row->user_impresionGE == "") && ($row->horafecha_impresionGE == "")) {
-									?>
-										<span class="label label-danger" data-toggle="tooltip" data-placement="top" title="Guía de entrega">GE</span>
-						            <?php
-								} else {
-									?>
-										<span class="label label-success" data-toggle="tooltip" data-placement="top" title="Guía de entrega">GE</span>
-						            <?php
-								}
-
-								if (($row->user_impresionST == "") && ($row->horafecha_impresionST == "")) {
-									?>
-										<span class="label label-danger" data-toggle="tooltip" data-placement="top" title="Tarjeta y sobre">TS</span>
-						            <?php
-								} else {
-									?>
-										<span class="label label-success" data-toggle="tooltip" data-placement="top" title="Tarjeta y sobre">TS</span>
-						            <?php
-								}
-								?>								
-								</div>
-								<?php
-							elseif ($field['field'] == 'pro_valor_total'):
-								echo "$ ".number_format((int)$row->pro_valor_total, 0, '.', '.');
-							else:
-								echo SiteHelpers::gridDisplay($row->$field['field'] , $field['field'] , $conn ); ?>
-							<?php endif; ?>
+							$conn = (isset($field['conn']) ? $field['conn'] : array() ) ;
+							echo SiteHelpers::gridDisplay($row->$field['field'] , $field['field'] , $conn ) ?>
 						<?php endif; ?>
 					 </td>
 					 <?php endif; ?>
@@ -155,10 +98,10 @@
 						<ul  class="dropdown-menu  icons-left pull-right">					 	
 
 					 	<?php if($access['is_detail'] ==1) : ?>
-						<li><a href="<?php echo site_url('orders/show/'.$row->id_orden)?>"  class="tips "  title="view"><i class="fa  fa-search"></i> <?php echo $this->lang->line('core.btn_view'); ?> </a></li>
+						<li><a href="<?php echo site_url('client/show/'.$row->id_cliente)?>"  class="tips "  title="view"><i class="fa  fa-search"></i> <?php echo $this->lang->line('core.btn_view'); ?> </a></li>
 						<?php endif;
 						if($access['is_edit'] ==1) : ?>
-						<li><a  href="<?php echo site_url('orders/add/'.$row->id_orden)?>"  class="tips "  title="edit"> <i class="fa fa-edit"></i>  <?php echo $this->lang->line('core.btn_edit'); ?> </a> </li>
+						<li><a  href="<?php echo site_url('client/add/'.$row->id_cliente)?>"  class="tips "  title="edit"> <i class="fa fa-edit"></i>  <?php echo $this->lang->line('core.btn_edit'); ?> </a> </li>
 						<?php endif;?>
 												
 						</ul>
@@ -188,7 +131,7 @@
 $(document).ready(function(){
 
 	$('.do-quick-search').click(function(){
-		$('#SximoTable').attr('action','<?php echo site_url("orders/multisearch");?>');
+		$('#SximoTable').attr('action','<?php echo site_url("client/multisearch");?>');
 		$('#SximoTable').submit();
 	});
 	

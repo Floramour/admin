@@ -80,6 +80,15 @@ class Client extends SB_Controller
     
 	  
 	}
+
+	function get_birds(){
+    $this->load->model('clientmodel');
+    if (isset($_GET['birds'])){
+      $q = strtolower($_GET['birds']);
+      echo $q;
+      //$this->clientmodel->get_bird($q);
+    }
+  }
 	
 	function show( $id = null) 
 	{
@@ -173,5 +182,5 @@ class Client extends SB_Controller
 			SiteHelpers::alert('success',"ID : ".implode(",",$this->input->post( 'id' , true ))."  , Has Been Removed Successfull"));
 		Redirect('client',301);
 	}
- }
+ 
 }

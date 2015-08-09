@@ -107,7 +107,7 @@
 									<label for="Fecha Orden" class=" control-label col-md-4 text-left"> Fecha Orden </label>
 									<div class="col-md-8">
 									  
-				<input type='text' class='form-control date' placeholder='' value='<?php echo $row['fecha_orden'];?>' name='fecha_orden'
+				<input type='text' class='form-control date' placeholder='' value='<?php echo empty($row['fecha_orden']) ? getdate() : $row['fecha_orden'];?>' name='fecha_orden'
 				style='width:150px !important;'	   /> <br />
 									  <i> <small></small></i>
 									 </div> 
@@ -140,15 +140,28 @@
 									  <input type='text' class='form-control' placeholder='' value='<?php echo $row['boleta'];?>' name='boleta'   /> <br />
 									  <i> <small></small></i>
 									 </div> 
-								  </div> 					
-								  <div class="form-group  " >
+								  </div>			
+								  <!--div class="form-group  " >
 									<label for="Operador" class=" control-label col-md-4 text-left"> Operador </label>
 									<div class="col-md-8">
 									  <select name='operador' rows='5' id='operador' code='{$operador}' 
 							class='select2 '    ></select> <br />
 									  <i> <small></small></i>
 									 </div> 
-								  </div> 					
+								  </div-->
+								  <div class="form-group  " >
+									<label for="Operador" class=" control-label col-md-4 text-left"> Operador </label>
+									<div class="col-md-8">
+									  <select name='operador' rows='5' id='operador' class='form-control '  required>
+									  	<option value="">-- Please Select --</option>
+							<?php foreach($operadores->result() as $operador) {?>
+							<option value="<?php echo $operador->first_name ." ". $operador->last_name; ?>"
+							 <?php if($row['operador'] == $operador->id ) echo 'selected';?>><?php echo $operador->first_name ." ". $operador->last_name; ?></option>
+							<?php } ?>
+						</select><br />
+									  <i> <small></small></i>
+									 </div> 
+								  </div> 	 					
 								  <div class="form-group  " >
 									<label for="Forma de Pago" class=" control-label col-md-4 text-left"> Forma de Pago </label>
 									<div class="col-md-8">
@@ -206,7 +219,7 @@
 								  <div class="form-group">
 									<label for="Id Cliente" class=" control-label col-md-4 text-left"> Id Cliente </label>
 									<div class="col-md-8">
-									  <input type='text' class='form-control' placeholder='' value='<?php echo $row['cli_id_cliente'];?>' name='cli_id_cliente' />Buscar: <i class="fa fa-search" onClick="window.open('search_client','popuppage','width=850,toolbar=1,resizable=1,scrollbars=yes,height=700,top=100,left=100');"></i><br />
+									  <input type='text' class='form-control' placeholder='' value='<?php echo $row['cli_id_cliente'];?>' name='cli_id_cliente' />Buscar: <a href="#search_client" data-toggle="modal" class="fa fa-search"></a><br />
 									  <i> <small></small></i>
 									 </div> 
 								  </div> 					
@@ -336,37 +349,54 @@
 				</fieldset>
 			</div>
 			
-			<div class="tab-pane m-t " id="Productos"> 
-									
+			<div class="tab-pane m-t " id="Productos">
+				<div id="p_scents">
+				<fieldset>
+					<div class="panel panel-primary">
+						<legend>
+							<div class="alert alert-success" role="alert" style="font-size: 13px; margin-left: 15px; margin-right: 15px;">Producto 1:</div>
+						</legend>
 								  <div class="form-group  " >
 									<label for="Pro Descripcion" class=" control-label col-md-4 text-left"> Pro Descripcion </label>
 									<div class="col-md-8">
-									  <input type='text' class='form-control' placeholder='' value='<?php echo $row['pro_descripcion'];?>' name='pro_descripcion'   /> <br />
+									  <textarea name='pro_descripcion_1' rows='2' id='editor' class='form-control markItUp '  
+						 ><?php echo $row['pro_descripcion'] ;?></textarea>
+									  <!--input type='text' class='form-control' placeholder='' value='<?php //echo $row['pro_descripcion'];?>' name='pro_descripcion_1'   /> <br /-->
 									  <i> <small></small></i>
 									 </div> 
-								  </div> 					
+								  </div> 								  			
 								  <div class="form-group  " >
 									<label for="Pro Codigo Mall" class=" control-label col-md-4 text-left"> Pro Codigo Mall </label>
 									<div class="col-md-8">
-									  <input type='text' class='form-control' placeholder='' value='<?php echo $row['pro_codigo_mall'];?>' name='pro_codigo_mall'   /> <br />
+									  <input type='text' class='form-control' placeholder='' value='<?php echo $row['pro_codigo_mall'];?>' name='pro_codigo_mall_2'   /> <br />
 									  <i> <small></small></i>
 									 </div> 
 								  </div> 					
 								  <div class="form-group  " >
 									<label for="Pro Valor Flores" class=" control-label col-md-4 text-left"> Pro Valor Flores </label>
 									<div class="col-md-8">
-									  <input type='text' class='form-control' placeholder='' value='<?php echo $row['pro_valor_flores'];?>' name='pro_valor_flores'   /> <br />
+									  <input type='text' class='form-control' placeholder='' value='<?php echo $row['pro_valor_flores'];?>' name='pro_valor_flores_3'   /> <br />
 									  <i> <small></small></i>
 									 </div> 
 								  </div> 					
 								  <div class="form-group  " >
 									<label for="Pro Accesorios" class=" control-label col-md-4 text-left"> Pro Accesorios </label>
 									<div class="col-md-8">
-									  <input type='text' class='form-control' placeholder='' value='<?php echo $row['pro_accesorios'];?>' name='pro_accesorios'   /> <br />
+									  <input type='text' class='form-control' placeholder='' value='<?php echo $row['pro_accesorios'];?>' name='pro_accesorios_4'   /> <br />
 									  <i> <small></small></i>
 									 </div> 
 								  </div> 					
-								  <div class="form-group  " >
+					</div>
+				</fieldset>
+				</div>
+				<button type="button" class="btn btn-success" style="background-color:#449d44" id="addScnt">Agregar</button>   
+
+				<fieldset>
+					<div class="panel panel-primary">
+						<legend>
+							<div class="alert alert-success" role="alert" style="font-size: 13px; margin-left: 15px; margin-right: 15px;">General:</div>
+						</legend>
+						<div class="form-group  " >
 									<label for="Conducción" class=" control-label col-md-4 text-left"> Conducción </label>
 									<div class="col-md-8">
 									  <input type='text' class='form-control' placeholder='' value='<?php echo $row['pro_conduccion'];?>' name='pro_conduccion'   /> <br />
@@ -409,6 +439,10 @@
 									  <i> <small></small></i>
 									 </div> 
 								  </div> 
+					</div>
+				</fieldset>								
+								  
+								  
 			</div>
 			
 			<div class="tab-pane m-t " id="Facturación"> 
@@ -573,6 +607,51 @@
 </div>		
 </div>	
 </div>
+	<!-- Modal HTML -->
+    <div id="search_client" class="modal fade">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title">Búsqueda de clientes</h4>
+                </div>
+                <div class="modal-body">
+                	<form>
+				        <div class="input-group">
+				            <input type="text" class="form-control" placeholder="Nombre del cliente&hellip;">
+				            <span class="input-group-btn">
+				                <button type="button" class="btn btn-default">Buscar</button>
+				            </span>
+				        </div>
+				        <br>
+				        <table class="table table-hover">
+					        <thead>
+					            <tr>
+					                <th>#</th>
+					                <th>ID</th>
+					                <th>Nombre</th>
+					                <th>Email</th>
+					                <th>Acción</th>
+					            </tr>
+					        </thead>
+					        <tbody>
+					            <tr>
+					                <td>1</td>
+					                <td>5426</td>
+					                <td>John</td>
+					                <td>johncarter@mail.com</td>
+					                <td><a>Seleccionar</a></td>
+					            </tr>            
+					        </tbody>
+					    </table>     
+				    </form>				    
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
 			 
 <script type="text/javascript">
 $(document).ready(function() { 
@@ -583,8 +662,8 @@ $(document).ready(function() {
 		$("#id_como_ubico").jCombo("<?php echo site_url('orders/comboselect?filter=como_ubico:id_como_ubico:como_ubico') ?>",
 		{  selected_value : '<?php echo $row["id_como_ubico"] ?>' });
 		
-		$("#operador").jCombo("<?php echo site_url('orders/comboselect?filter=tb_users:id:first_name|last_name') ?>",
-		{  selected_value : '<?php echo $row["operador"] ?>' });
+		//$("#operador").jCombo("<?php echo site_url('orders/comboselect?filter=tb_users:id:first_name|last_name') ?>",
+		//{  selected_value : '<?php echo $row["operador"] ?>' });
 		
 		$("#forma_pago").jCombo("<?php echo site_url('orders/comboselect?filter=formas_pago:id_forma_pago:forma_pago') ?>",
 		{  selected_value : '<?php echo $row["forma_pago"] ?>' });
@@ -593,4 +672,23 @@ $(document).ready(function() {
 		{  selected_value : '<?php echo $row["des_pais"] ?>' });
 		 	 
 });
-</script>		 
+
+$(function() {
+        var scntDiv = $('#p_scents');
+        var i = $('#p_scents fieldset').size() + 1;
+
+        $('#addScnt').live('click', function() {
+                $('<fieldset><div class="panel panel-primary"><legend><div class="alert alert-success" role="alert" style="font-size: 13px; margin-left: 15px; margin-right: 15px;">Producto ' + i +':</div></legend><div class="form-group  " ><label for="Pro Descripcion" class=" control-label col-md-4 text-left"> Pro Descripcion </label><div class="col-md-8"><textarea name="pro_descripcion_1" rows="2" id="editor" class="form-control markItUp "></textarea><br /><i><small></small></i></div></div><div class="form-group"><label for="Pro Codigo Mall" class=" control-label col-md-4 text-left">Pro Codigo Mall</label><div class="col-md-8"><input type="text" class="form-control" placeholder="" value="" name="pro_codigo_mall_' + i +'"  /><br /><i><small></small></i></div></div><div class="form-group  " ><label for="Pro Valor Flores" class=" control-label col-md-4 text-left"> Pro Valor Flores </label><div class="col-md-8"><input type="text" class="form-control" placeholder="" value="" name="pro_valor_flores_' + i +'"   /><br /><i><small></small></i></div></div><div class="form-group  " ><label for="Pro Accesorios" class=" control-label col-md-4 text-left"> Pro Accesorios </label><div class="col-md-8"><input type="text" class="form-control" placeholder="" value="" name="pro_accesorios_' + i +'"   /><br /><i><small></small></i></div></div><button type="button" class="btn btn-danger" id="remScnt">Eliminar</button></div></fieldset>').appendTo(scntDiv);
+                i++;
+                return false;
+        });
+
+        $('#remScnt').live('click', function() { 
+                if( i > 2 ) {
+                        $(this).parents('fieldset').remove();
+                        i--;
+                }
+                return false;
+        });
+});
+</script>

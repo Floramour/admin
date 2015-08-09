@@ -24,13 +24,7 @@ class Clientmodel extends SB_Model
 	public static function queryGroup(){
 		return "   ";
 	}
-	function get_search() {
-  $match = $this->input->post('search');
-  $this->db->like('nombre',$match);
-  $this->db->or_like('email',$match);
-  $query = $this->db->get('clientes');
-  return $query->result();
-}
+
 }
 
 ?>

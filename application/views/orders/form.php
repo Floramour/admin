@@ -33,7 +33,7 @@
 
 <ul class="nav nav-tabs"><li class="active"><a href="#Orden" data-toggle="tab">Orden</a></li>
 				<li class=""><a href="#Cliente-Destinatario" data-toggle="tab">Cliente - Destinatario</a></li>
-				<li class=""><a href="#Productos" data-toggle="tab">Productos</a></li>
+				<li class=""><a href="#Productos" data-toggle="tab">Listado de productos - Conducción </a></li>
 				<li class=""><a href="#Facturación" data-toggle="tab">Facturación</a></li>
 				</ul><div class="tab-content"><div class="tab-pane m-t active" id="Orden"> 
 				
@@ -350,63 +350,131 @@
 			</div>
 			
 			<div class="tab-pane m-t " id="Productos">
-				<div id="p_scents">
-				<fieldset>
-					<div class="panel panel-primary">
-						<legend>
-							<div class="alert alert-success" role="alert" style="font-size: 13px; margin-left: 15px; margin-right: 15px;">Producto 1:</div>
-						</legend>
-								  <div class="form-group  " >
-									<label for="Pro Descripcion" class=" control-label col-md-4 text-left"> Pro Descripcion </label>
+				<ul class="nav nav-tabs">
+			        <li class="active"><a data-toggle="tab" href="#products">Listado de productos</a></li>
+			        <li><a data-toggle="tab" href="#shipping">Conducción</a></li>
+			        
+			    </ul>
+			    <div class="tab-content">
+			        <div id="products" class="tab-pane fade in active" style="margin-top:15px;">
+
+			        	<ul class="nav nav-tabs" id="p_scents">
+			        		<li><a data-toggle="tab" href="#" id="addScnt">+</a></li>
+			        		<li class="active"><a data-toggle="tab" href="#product_1">Producto 1</a></li>					        
+					    </ul>
+
+					    <div class="tab-content">
+					    	
+					        <div id="product_1" class="tab-pane fade in active" style="margin-top:15px;">
+					            <div class="form-group">
+									<label for="Pro Id Producto" class="control-label col-md-4 text-left"> Id </label>
 									<div class="col-md-8">
-									  <textarea name='pro_descripcion_1' rows='2' id='editor' class='form-control markItUp '  
-						 ><?php echo $row['pro_descripcion'] ;?></textarea>
+									  <input type="text" class="form-control" placeholder="Id único del producto" value="" name="pro_pro_id_1" /> <br />
+									  <i> <small></small></i>
+									 </div> 
+								  </div>
+								  <div class="form-group">
+									<label for="Pro Codigo Mall" class="control-label col-md-4 text-left"> Código mall </label>
+									<div class="col-md-8">
+									  <input type="text" class="form-control" placeholder="" value="<?php echo $row['pro_codigo_mall'];?>" name="pro_codigo_mall_1" /> <br />
+									  <i> <small></small></i>
+									 </div> 
+								  </div>
+								  <div class="form-group">
+									<label for="Pro Nombre" class="control-label col-md-4 text-left"> Nombre </label>
+									<div class="col-md-8">
+									  <input type="text" class="form-control" placeholder="Nombre del producto" value="" name="pro_nombre_1" /> <br />
+									  <i> <small></small></i>
+									 </div> 
+								  </div>
+								  <div class="form-group  " >
+									<label for="Pro Descripcion" class=" control-label col-md-4 text-left"> Descripción </label>
+									<div class="col-md-8">
+									  <textarea name="pro_descripcion_1" rows="2" id="editor" class="form-control markItUp"><?php echo $row['pro_descripcion'] ;?></textarea>
 									  <!--input type='text' class='form-control' placeholder='' value='<?php //echo $row['pro_descripcion'];?>' name='pro_descripcion_1'   /> <br /-->
 									  <i> <small></small></i>
 									 </div> 
-								  </div> 								  			
+								  </div>
 								  <div class="form-group  " >
-									<label for="Pro Codigo Mall" class=" control-label col-md-4 text-left"> Pro Codigo Mall </label>
+									<label for="Pro Observacion" class=" control-label col-md-4 text-left"> Observaciones </label>
 									<div class="col-md-8">
-									  <input type='text' class='form-control' placeholder='' value='<?php echo $row['pro_codigo_mall'];?>' name='pro_codigo_mall_2'   /> <br />
+									  <textarea name="pro_observaciones_1" rows="2" id="editor" class="form-control markItUp"></textarea>
 									  <i> <small></small></i>
 									 </div> 
-								  </div> 					
+								  </div>	
 								  <div class="form-group  " >
-									<label for="Pro Valor Flores" class=" control-label col-md-4 text-left"> Pro Valor Flores </label>
+									<label for="Pro Valor Flores" class=" control-label col-md-4 text-left"> Valor </label>
 									<div class="col-md-8">
-									  <input type='text' class='form-control' placeholder='' value='<?php echo $row['pro_valor_flores'];?>' name='pro_valor_flores_3'   /> <br />
+									  <input type="text" class="form-control" placeholder="0" value="<?php echo $row['pro_valor_flores'];?>" name="pro_valor_flores_1"   /> <br />
 									  <i> <small></small></i>
 									 </div> 
-								  </div> 					
+								  </div>
 								  <div class="form-group  " >
+									<label for="Color" class=" control-label col-md-4 text-left"> Color </label>
+									<div class="col-md-8">
+									  <select name="pro_color_1" rows="5" id="pro_color_1" class="form-control">
+									  	<option value="">-- Please Select --</option>
+										<?php foreach($operadores->result() as $operador) {?>
+										<option value="<?php echo $operador->first_name ." ". $operador->last_name; ?>"
+										 <?php if($row['operador'] == $operador->id ) echo 'selected';?>><?php echo $operador->first_name ." ". $operador->last_name; ?></option>
+										<?php } ?>
+									</select><br />
+									  <i> <small></small></i>
+									 </div> 
+								  </div> 	 					
+								  <!--div class="form-group  " >
 									<label for="Pro Accesorios" class=" control-label col-md-4 text-left"> Pro Accesorios </label>
 									<div class="col-md-8">
-									  <input type='text' class='form-control' placeholder='' value='<?php echo $row['pro_accesorios'];?>' name='pro_accesorios_4'   /> <br />
+									  <input type='text' class='form-control' placeholder='' value='<?php //echo $row['pro_accesorios'];?>' name='pro_accesorios_4'   /> <br />
 									  <i> <small></small></i>
 									 </div> 
-								  </div> 					
-					</div>
-				</fieldset>
-				</div>
-				<button type="button" class="btn btn-success" style="background-color:#449d44" id="addScnt">Agregar</button>   
-
-				<fieldset>
-					<div class="panel panel-primary">
-						<legend>
-							<div class="alert alert-success" role="alert" style="font-size: 13px; margin-left: 15px; margin-right: 15px;">General:</div>
-						</legend>
-						<div class="form-group  " >
+								  </div--> 	
+					        
+					        </div>
+					    </div>      			  
+						
+							
+						
+					<!--button type="button" class="btn btn-success" style="background-color:#449d44" id="addScnt">Agregar</button-->				    
+			        </div>
+			        
+			        <div id="shipping" class="tab-pane fade" style="margin-top:15px;">
+			            
+			            		<div class="form-group  " >
+									<label for="Conducción" class=" control-label col-md-4 text-left"> Destino </label>
+									<div class="col-md-8">
+									  <label class='radio radio-inline'>
+										<input type='radio' name='conduccion_chile' value ='Chile' checked> Chile </label>
+										<label class='radio radio-inline'>
+										<input type='radio' name='conduccion_extranjero' value ='Extranjero'> Extranjero </label><br /><br />
+										<select name='operador' rows='5' id='operador' class='form-control '  required>
+										  	<option value="">-- Please Select --</option>
+											<?php foreach($operadores->result() as $operador) {?>
+											<option value="<?php echo $operador->first_name ." ". $operador->last_name; ?>"
+											<?php if($row['operador'] == $operador->id ) echo 'selected';?>><?php echo $operador->first_name ." ". $operador->last_name; ?></option>
+											<?php } ?>
+										</select>
+									  <i> <small></small></i>
+									 </div> 
+								  </div>
+								  <div class="form-group  " >
+									<label for="Operador" class=" control-label col-md-4 text-left"> Operador </label>
+									<div class="col-md-8">
+									  <br />
+									  <i> <small></small></i>
+									 </div> 
+								  </div>
+								  <div class="form-group  " >
 									<label for="Conducción" class=" control-label col-md-4 text-left"> Conducción </label>
 									<div class="col-md-8">
-									  <input type='text' class='form-control' placeholder='' value='<?php echo $row['pro_conduccion'];?>' name='pro_conduccion'   /> <br />
+									  <input type='text' class='form-control' placeholder='$' value='<?php echo $row['pro_conduccion'];?>' name='pro_conduccion'   /> <br />
 									  <i> <small></small></i>
 									 </div> 
 								  </div> 					
 								  <div class="form-group  " >
 									<label for="Convenio" class=" control-label col-md-4 text-left"> Convenio </label>
 									<div class="col-md-8">
-									  <input type='text' class='form-control' placeholder='' value='<?php echo $row['pro_convenio'];?>' name='pro_convenio'   /> <br />
+									  <input type='text' class='form-control' placeholder='$' value='<?php echo $row['pro_convenio'];?>' name='pro_convenio'   /> <br />
 									  <i> <small></small></i>
 									 </div> 
 								  </div> 					
@@ -420,14 +488,14 @@
 								  <div class="form-group  " >
 									<label for="Total" class=" control-label col-md-4 text-left"> Total </label>
 									<div class="col-md-8">
-									  <input type='text' class='form-control' placeholder='' value='<?php echo $row['pro_valor_total'];?>' name='pro_valor_total'   /> <br />
+									  <input type='text' class='form-control' placeholder='Valor total de la Orden' value='<?php echo $row['pro_valor_total'];?>' name='pro_valor_total'   /> <br />									  
 									  <i> <small></small></i>
 									 </div> 
 								  </div> 					
 								  <div class="form-group  " >
 									<label for="Dedicatoria" class=" control-label col-md-4 text-left"> Dedicatoria </label>
 									<div class="col-md-8">
-									  <textarea name='pro_dedicatoria' rows='2' id='pro_dedicatoria' class='form-control '  
+									  <textarea name='pro_dedicatoria' rows='2' id='editor' class='form-control markItUp'  
 				           ><?php echo $row['pro_dedicatoria'] ;?></textarea> <br />
 									  <i> <small></small></i>
 									 </div> 
@@ -439,10 +507,8 @@
 									  <i> <small></small></i>
 									 </div> 
 								  </div> 
-					</div>
-				</fieldset>								
-								  
-								  
+			        </div>
+			    </div>	  
 			</div>
 			
 			<div class="tab-pane m-t " id="Facturación"> 
@@ -675,10 +741,31 @@ $(document).ready(function() {
 
 $(function() {
         var scntDiv = $('#p_scents');
+        var product_form = $('#pro_form');
+        var i = $('#p_scents ul').size() + 2;
+        
+        $('#addScnt').live('click', function() {
+                $('<li class="active"><a data-toggle="tab" href="#product_'+i+'">Producto '+i+'</a></li>').appendTo(scntDiv);
+                i++;
+                return false;
+        });
+        
+        $('#remScnt').live('click', function() { 
+                if( i > 2 ) {
+                        $(this).parents('p').remove();
+                        i--;
+                }
+                return false;
+        });
+});
+
+/*
+$(function() {
+        var scntDiv = $('#p_scents');
         var i = $('#p_scents fieldset').size() + 1;
 
         $('#addScnt').live('click', function() {
-                $('<fieldset><div class="panel panel-primary"><legend><div class="alert alert-success" role="alert" style="font-size: 13px; margin-left: 15px; margin-right: 15px;">Producto ' + i +':</div></legend><div class="form-group  " ><label for="Pro Descripcion" class=" control-label col-md-4 text-left"> Pro Descripcion </label><div class="col-md-8"><textarea name="pro_descripcion_1" rows="2" id="editor" class="form-control markItUp "></textarea><br /><i><small></small></i></div></div><div class="form-group"><label for="Pro Codigo Mall" class=" control-label col-md-4 text-left">Pro Codigo Mall</label><div class="col-md-8"><input type="text" class="form-control" placeholder="" value="" name="pro_codigo_mall_' + i +'"  /><br /><i><small></small></i></div></div><div class="form-group  " ><label for="Pro Valor Flores" class=" control-label col-md-4 text-left"> Pro Valor Flores </label><div class="col-md-8"><input type="text" class="form-control" placeholder="" value="" name="pro_valor_flores_' + i +'"   /><br /><i><small></small></i></div></div><div class="form-group  " ><label for="Pro Accesorios" class=" control-label col-md-4 text-left"> Pro Accesorios </label><div class="col-md-8"><input type="text" class="form-control" placeholder="" value="" name="pro_accesorios_' + i +'"   /><br /><i><small></small></i></div></div><button type="button" class="btn btn-danger" id="remScnt">Eliminar</button></div></fieldset>').appendTo(scntDiv);
+                $('<fieldset><div class="panel panel-primary"><legend><div class="alert alert-success" role="alert" style="font-size: 13px; margin-left: 15px; margin-right: 15px;">Producto ' + i +':</div></legend><div class="form-group  " ><label for="Pro Descripcion" class=" control-label col-md-4 text-left"> Pro Descripcion </label><div class="col-md-8"><textarea name="pro_descripcion_2341" rows="2" id="editor" class="form-control markItUp "></textarea><br /><i><small></small></i></div></div><div class="form-group"><label for="Pro Codigo Mall" class=" control-label col-md-4 text-left">Pro Codigo Mall</label><div class="col-md-8"><input type="text" class="form-control" placeholder="" value="" name="pro_codigo_mall_' + i +'"  /><br /><i><small></small></i></div></div><div class="form-group  " ><label for="Pro Valor Flores" class=" control-label col-md-4 text-left"> Pro Valor Flores </label><div class="col-md-8"><input type="text" class="form-control" placeholder="" value="" name="pro_valor_flores_' + i +'"   /><br /><i><small></small></i></div></div><div class="form-group  " ><label for="Pro Accesorios" class=" control-label col-md-4 text-left"> Pro Accesorios </label><div class="col-md-8"><input type="text" class="form-control" placeholder="" value="" name="pro_accesorios_' + i +'"   /><br /><i><small></small></i></div></div><button type="button" class="btn btn-danger" id="remScnt">Eliminar</button></div></fieldset>').appendTo(scntDiv);
                 i++;
                 return false;
         });
@@ -690,5 +777,5 @@ $(function() {
                 }
                 return false;
         });
-});
+});*/
 </script>

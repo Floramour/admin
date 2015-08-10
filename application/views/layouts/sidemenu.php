@@ -15,7 +15,7 @@
 				</span>
 				<a href="<?php echo site_url('user/profile');?>" >
 				<span class="clear"> <span class="block m-t-xs"> <strong class="font-bold"><?php echo $this->session->userdata('fid');?> </strong>
-				 <br /> Last Login : <br />
+				 <br /> <?php echo $this->lang->line('core.lastlogin'); ?> : <br />
 				<small><?php echo date("H:i M j, Y",strtotime($this->session->userdata('ll'))) ;?></small>				
 				 </span> 
 				 </span>

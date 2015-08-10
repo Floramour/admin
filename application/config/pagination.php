@@ -18,6 +18,8 @@
 */
 // --------------------------------------------------------------------------
  
+$CI =& get_instance();
+
 // $config['base_url'] = '';
 $config['per_page'] = 2;
 $config['uri_segment'] = 3; 
@@ -29,19 +31,19 @@ $config['query_string_segment'] = 'page';
 $config['full_tag_open'] = '<ul class="pagination pull-right">';
 $config['full_tag_close'] = '</ul><!--pagination-->'; 
  
-$config['first_link'] = 'First';
+$config['first_link'] = $CI->lang->line('core.first');
 $config['first_tag_open'] = '<li class="prev page">';
 $config['first_tag_close'] = '</li>';
  
-$config['last_link'] = 'Last';
+$config['last_link'] = $CI->lang->line('core.last');
 $config['last_tag_open'] = '<li class="next page">';
 $config['last_tag_close'] = '</li>';
- 
-$config['next_link'] = 'Next';
+  
+$config['next_link'] = $CI->lang->line('core.next');
 $config['next_tag_open'] = '<li class="next page">';
 $config['next_tag_close'] = '</li>';
  
-$config['prev_link'] = 'Previous';
+$config['prev_link'] = $CI->lang->line('core.previous');
 $config['prev_tag_open'] = '<li class="prev page">';
 $config['prev_tag_close'] = '</li>';
  

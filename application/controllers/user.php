@@ -70,12 +70,12 @@ class User extends SB_controller {
 
 			$this->db->where('id' ,$this->session->userdata('uid'));
 			$this->db->update('tb_users',$data);
-			$this->session->set_flashdata('message',SiteHelpers::alert('success','Your Profile has been updated succesfuly'));
+			$this->session->set_flashdata('message',SiteHelpers::alert('success',$this->lang->line('core.success_profile')));
 			redirect('user/profile',301);
 
 		} else {
 
-			$this->session->set_flashdata('message',SiteHelpers::alert('error','Ops Something went wrong !'));
+			$this->session->set_flashdata('message',SiteHelpers::alert('error',$this->lang->line('core.error_profile')));
 			redirect('user/profile',301);
 		}
 
@@ -93,11 +93,11 @@ class User extends SB_controller {
 			$data = array('password'=>md5(trim($this->input->post('password'))));
 			$this->db->where('id' ,$this->session->userdata('uid'));
 			$this->db->update('tb_users',$data);
-			$this->session->set_flashdata('message',SiteHelpers::alert('success','Your password has been changed succesfuly'));
+			$this->session->set_flashdata('message',SiteHelpers::alert('success',$this->lang->line('core.success_password')));
 			redirect('user/profile',301);
 
 		} else {
-			$this->session->set_flashdata('message',SiteHelpers::alert('error','Ops Something went wrong !'));
+			$this->session->set_flashdata('message',SiteHelpers::alert('error',$this->lang->line('core.error_profile')));
 			redirect('user/profile',301);
 		}
 
@@ -127,7 +127,7 @@ class User extends SB_controller {
 			$this->load->library('recaptcha');
 			$this->recaptcha->recaptcha_check_answer() ;
 			if( ! ($this->recaptcha->getIsValid() )){
-				$this->session->set_flashdata('message',SiteHelpers::alert('error','Incorrect Captcha'));
+				$this->session->set_flashdata('message',SiteHelpers::alert('error',$this->lang->line('core.error_inv_capt')));
 				$this->session->set_userdata(array(
 					'_POST_DATA' => $_POST,
 				));
@@ -158,7 +158,7 @@ class User extends SB_controller {
 			redirect('dashboard',301);
 
 		} else {
-			$this->session->set_flashdata('message',SiteHelpers::alert('error','Invalid email or password combination <br /> or your account is not active yet'));
+			$this->session->set_flashdata('message',SiteHelpers::alert('error',$this->lang->line('core.error_inv_cred')));
 			redirect('user/login',301);
 		}
 
@@ -186,6 +186,7 @@ class User extends SB_controller {
 			if( $this->session->userdata("_POST_DATA")){
 				$this->data = array_merge( $this->data , $this->session->userdata("_POST_DATA"));
 				$this->session->unset_userdata('_POST_DATA');
+
 			}
 
 			$this->data['content'] = $this->load->view('user/register',$this->data, true );
@@ -199,17 +200,17 @@ class User extends SB_controller {
 	public function create() {
 
 		// check for captcha here
-		if( CNF_RECAPTCHA ){
+		/*if( CNF_RECAPTCHA ){
 			$this->load->library('recaptcha');
 			$this->recaptcha->recaptcha_check_answer() ;
 			if( ! ($this->recaptcha->getIsValid() )){
-				$this->session->set_flashdata('message',SiteHelpers::alert('error','Incorrect Captcha'));
+				$this->session->set_flashdata('message',SiteHelpers::alert('error',$this->lang->line('core.error_inv_capt')));
 				$this->session->set_userdata(array(
 					'_POST_DATA' => $_POST,
 				));
-				redirect("user/create");
+				//redirect("user/create");
 			} 
-		}
+		}*/
 
 
 
@@ -222,7 +223,7 @@ class User extends SB_controller {
 		);
 
 		$this->form_validation->set_rules( $rules );
-		if( $this->form_validation->run() && $this->recaptcha->getIsValid() ){
+		if( $this->form_validation->run() /*&& $this->recaptcha->getIsValid()*/ ){
 			$code = rand(10000,10000000);
 			$authen = array(
 				'first_name'	=> $this->input->post('firstname',true),
@@ -253,19 +254,19 @@ class User extends SB_controller {
 				$headers .= 'From: '.CNF_APPNAME.' <'.CNF_EMAIL.'>' . "\r\n";
 					mail($to, $subject, $message, $headers);
 
-				$message = "Thanks for registering! . Please check your inbox and follow activation link";
+				$message = $this->lang->line('core.msg_act_email');
 
 			} elseif(CNF_ACTIVATION=='manual') {
-				$message = "Thanks for registering! . We will validate you account before your account active";
+				$message = $this->lang->line('core.msg_act_validate');
 			} else {
-				$message = "Thanks for registering! . Your account is active now ";
+				$message = $this->lang->line('core.msg_act_now');
 			}
 
 			$this->session->set_flashdata('message',SiteHelpers::alert('success',$message));
 			redirect('user/login',301);
 		} else {
 			
-			$this->session->set_flashdata('message',SiteHelpers::alert('error','Ops Something Went Wrong'));
+			$this->session->set_flashdata('message',SiteHelpers::alert('error',$this->lang->line('core.error_profile')));
 			$this->session->set_userdata(array(
 				'_POST_DATA' => $_POST,
 			));
@@ -279,7 +280,7 @@ class User extends SB_controller {
 		$num = $this->input->get('code',true);
 		if($num =='')
 		{
-			$this->session->set_flashdata('message',SiteHelpers::alert('error','Invalid Code Activation!'));
+			$this->session->set_flashdata('message',SiteHelpers::alert('error',$this->lang->line('core.error_inv_code')));
 			redirect('user/login',301);
 		}
 		$user = $this->db->get_where('tb_users',array('activation'=>$num))->row();
@@ -289,12 +290,12 @@ class User extends SB_controller {
 			$this->db->where('activation',$num);
 			$this->db->update('tb_users',$data);
 
-			$this->session->set_flashdata('message',SiteHelpers::alert('success','Your account is active now!'));
+			$this->session->set_flashdata('message',SiteHelpers::alert('success',$this->lang->line('core.success_acc_act')));
 			redirect('user/login',301);
 
 		} else {
 
-			$this->session->set_flashdata('message',SiteHelpers::alert('error','Invalid Code Activation!'));
+			$this->session->set_flashdata('message',SiteHelpers::alert('error',$this->lang->line('core.error_inv_code')));
 			redirect('user/login',301);
 		}
 
@@ -324,17 +325,17 @@ class User extends SB_controller {
 				$this->db->where('id',$user->id);
 				$this->db->update('tb_users',$data);
 
-				$this->session->set_flashdata('message',SiteHelpers::alert('success','Please check your email and follow reset link '));
+				$this->session->set_flashdata('message',SiteHelpers::alert('success',$this->lang->line('core.success_forgot')));
 				redirect('user/login',301);
 
 
 			} else {
-				$this->session->set_flashdata('message',SiteHelpers::alert('error','Cant find email address'));
+				$this->session->set_flashdata('message',SiteHelpers::alert('error',$this->lang->line('core.error_cant_find_email')));
 				redirect('user/login',301);
 			}
 
 		}  else {
-				$this->session->set_flashdata('message',SiteHelpers::alert('error','Please write your email address'));
+				$this->session->set_flashdata('message',SiteHelpers::alert('error',$this->lang->line('core.error_write_email')));
 				redirect('user/login',301);
 		}
 	}
@@ -350,7 +351,7 @@ class User extends SB_controller {
 			$this->load->view('layouts/login', $this->data );
 
 		} else {
-			$this->session->set_flashdata('message',SiteHelpers::alert('error','Cant find your reset code'));
+			$this->session->set_flashdata('message',SiteHelpers::alert('error',$this->lang->line('core.error_cant_find_code')));
 			redirect('user/login',301);
 		}
 
@@ -375,13 +376,13 @@ class User extends SB_controller {
 				$this->db->where('id',$user->id);
 				$this->db->update('tb_users',$data);
 			}
-			$this->session->set_flashdata('message',SiteHelpers::alert('success','Password has been saved!'));
+			$this->session->set_flashdata('message',SiteHelpers::alert('success',$this->lang->line('core.success_password')));
 			redirect('user/login',301);
 
 		} else {
 			$this->session->set_flashdata(
 				array(
-					'message'	=>SiteHelpers::alert('error','The following errors occurred'),
+					'message'	=>SiteHelpers::alert('error',$this->lang->line('core.error_profile')),
 					'errors'	=> validation_errors('<li>', '</li>')
 					)
 			);

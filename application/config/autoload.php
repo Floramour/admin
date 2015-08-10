@@ -96,7 +96,7 @@ $autoload['config'] = array('pagination');
 |
 */
 
-$autoload['language'] = array();
+$autoload['language'] = array('core');
 
 
 /*

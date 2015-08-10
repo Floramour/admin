@@ -64,6 +64,22 @@ $db['default']['swap_pre'] = '';
 $db['default']['autoinit'] = TRUE;
 $db['default']['stricton'] = FALSE;
 
+$db['800flores']['hostname'] = 'localhost';
+$db['800flores']['username'] = 'root';
+$db['800flores']['password'] = '';
+$db['800flores']['database'] = 'flores_flores';
+$db['800flores']['dbdriver'] = 'mysqli';
+$db['800flores']['dbprefix'] = '';
+$db['800flores']['pconnect'] = TRUE;
+$db['800flores']['db_debug'] = TRUE;
+$db['800flores']['cache_on'] = FALSE;
+$db['800flores']['cachedir'] = '';
+$db['800flores']['char_set'] = 'utf8';
+$db['800flores']['dbcollat'] = 'utf8_general_ci';
+$db['800flores']['swap_pre'] = '';
+$db['800flores']['autoinit'] = TRUE;
+$db['800flores']['stricton'] = FALSE;
+
 
 /* End of file database.php */
 /* Location: ./application/config/database.php */

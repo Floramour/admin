@@ -17,8 +17,8 @@
 	<div class="page-content-wrapper m-t">
     <div class="toolbar-line ">		
 		<?php if($this->access['is_add'] ==1) : ?>
-		<a href="<?php echo site_url('products/add') ?>" class="tips btn btn-xs btn-info"  title="<?php echo $this->lang->line('core.btn_new'); ?>">
-		<i class="fa fa-plus"></i>&nbsp;<?php echo $this->lang->line('core.btn_new'); ?> </a>
+		<a href="<?php echo site_url('products/add') ?>" class="tips btn btn-xs btn-info"  title="<?php echo $this->lang->line('core.btn_new'); ?>o Producto">
+		<i class="fa fa-plus"></i>&nbsp;<?php echo $this->lang->line('core.btn_new'); ?>o Producto</a>
 		<?php endif;
 		if($this->access['is_remove'] ==1) : ?>		
 		<a href="javascript:void(0);"  onclick="SximoDelete();" class="tips btn btn-xs btn-danger" title="<?php echo $this->lang->line('core.btn_remove'); ?>">

@@ -6,39 +6,39 @@
 
 	// General , Login Info & Signup
 	$lang["core.home"] = "Home";
-	$lang["core.group"] = "Group";
+	$lang["core.group"] = "Grupo";
 	$lang["core.username"] = "Username";
-	$lang["core.email"] = "Email Address";
+	$lang["core.email"] = "Email";
 	$lang["core.password"] = "Password";
-	$lang["core.repassword"] = "Confirm Password";
-	$lang["core.forgotpassword"] = "Forgot Password";
-	$lang["core.newpassword"] = "New Password";
+	$lang["core.repassword"] = "Confirmar Password";
+	$lang["core.forgotpassword"] = "Olvidé mi Password";
+	$lang["core.newpassword"] = "Nuevo Password";
 	$lang["core.conewpassword"] = "Confirm Password";
 	$lang["core.notepassword"] = "Leave blank if you dont want to change current password ";	
 	$lang["core.submit"] = "Submit";
-	$lang["core.signin"] = "Sign In";
-	$lang["core.signup"] = "Sign Up";
+	$lang["core.signin"] = "Entrar";
+	$lang["core.signup"] = "Registrarse";
 	$lang["core.language"] = "Language";	
-	$lang["core.firstname"] = "First Name";
-	$lang["core.lastname"] = "Last Name ";
-	$lang["core.lastlogin"] = "Last Login";
-	$lang["core.personalinfo"] = "Personal Info";
+	$lang["core.firstname"] = "Nombre";
+	$lang["core.lastname"] = "Apellido";
+	$lang["core.lastlogin"] = "Último Acceso";
+	$lang["core.personalinfo"] = "Información Personal ";
 	$lang["core.changepassword"] = "Change Password";
 	$lang["core.registernew"] = "Register New Account ";
 	
 /* grid , pagination */
-	$lang["core.grid_displaying"] = "Displaying";
+	$lang["core.grid_displaying"] = "Mostrando";
 	$lang["core.grid_to"] = "To";
 	$lang["core.grid_of"] = "Of";
-	$lang["core.grid_show"] = "Show";
-	$lang["core.grid_sort"] = "Sort";
-	$lang["core.grid_order"] = "Order";	
-	$lang["core.grid_page"] = "Page";
-	$lang["core.grid_btnsubmit"] = "Go";	
-	$lang["core.first"] = "First";
-	$lang["core.previous"] = "Previous";
-	$lang["core.next"] = "Next";
-	$lang["core.last"] = "Last";		
+	$lang["core.grid_show"] = "Mostrar";
+	$lang["core.grid_sort"] = "Ordenamiento";
+	$lang["core.grid_order"] = "Orden";	
+	$lang["core.grid_page"] = "Página";
+	$lang["core.grid_btnsubmit"] = "Ir";
+	$lang["core.first"] = "Primera";
+	$lang["core.previous"] = "Anterior";
+	$lang["core.next"] = "Siguiente";
+	$lang["core.last"] = "Última";		
 
 /* Menu navigation here */
 	$lang["core.m_controlpanel"] = "Panel";
@@ -46,7 +46,7 @@
 	$lang["core.m_setting"] = "Setting";
 	$lang["core.m_usersgroups"] = "Users & Groups";
 	$lang["core.m_users"] = "Users";
-	$lang["core.m_groups"] = "Groups";
+	$lang["core.m_groups"] = "Grupos";
 	$lang["core.m_pagecms"] = "Page CMS";
 
 	$lang["core.m_logs"] = "Activity Logs";
@@ -55,7 +55,7 @@
 	$lang["core.m_manual"] = "Manual Guide";
 	$lang["core.m_blastemail"] = "Blast Email";
 	$lang["core.m_myaccount"] = "Account";
-	$lang["core.m_logout"] = "Logout";
+	$lang["core.m_logout"] = "Salir";
 	$lang["core.m_profile"] = "Profile";
 	$lang["core.m_detail"] = "Detail";
 	$lang["core.m_form"] = "Form";
@@ -104,24 +104,24 @@
 	
 
 /* submit */
-	$lang["core.sb_savechanges"] = "Save Changes";
+	$lang["core.sb_savechanges"] = "Guardar Cambios";
 	$lang["core.sb_send"] = "Send";
 	$lang["core.sb_save"] = "Save";
-	$lang["core.sb_submit"] = "Submit";
-	$lang["core.sb_cancel"] = "Cancel";	
+	$lang["core.sb_submit"] = "Guardar y Salir";
+	$lang["core.sb_cancel"] = "Cancelar";	
 	
 /* button */
 	$lang["core.btn_back"] = "Back";	
-	$lang["core.btn_action"] = "Action";	
+	$lang["core.btn_action"] = "Acciones";	
 	$lang["core.btn_search"] = "Search";	
-	$lang["core.btn_download"] = "Download";	
-	$lang["core.btn_config"] = "Configuration";	
+	$lang["core.btn_download"] = "Descargar";	
+	$lang["core.btn_config"] = "Configurar";	
 	$lang["core.btn_create"] = "Create";	
-	$lang["core.btn_remove"] = "Remove";
-	$lang["core.btn_edit"] = "Edit";	
-	$lang["core.btn_view"] = "View";
+	$lang["core.btn_remove"] = "Eliminar";
+	$lang["core.btn_edit"] = "Editar";	
+	$lang["core.btn_view"] = "Ver";
 	$lang["core.btn_typesearch"] = "Type and Enter";		
-  $lang["core.btn_apply"] = "Apply" ;
+  $lang["core.btn_apply"] = "Guardar" ;
   $lang["core.btn_preview"] = "Preview" ;
 	$lang["core.btn_new"] = "New";
 	
@@ -177,36 +177,36 @@
 	$lang["core.avatar"] = "Avatar";
 	$lang["core.lg_createaccount"] = "Create an Account";
 	$lang["core.lg_havenoaccount"] = "Do Not have an Account";
-	$lang["core.lg_backhome"] = "Back to Homepage";	
-	$lang["core.lg_backlogin"] = "Back to Login";
-	$lang["core.lg_backsite"] = "Back to Site";
+	$lang["core.lg_backhome"] = "Back to Homepage";
+	$lang["core.lg_backlogin"] = "Volver al Login";
+	$lang["core.lg_backsite"] = "Volver al Sitio";
 
-	$lang["core.msg_act_email"] = "Thanks for registering! . Please check your inbox and follow activation link";
-	$lang["core.msg_act_validate"] = "Thanks for registering! . We will validate you account before your account active";
-	$lang["core.msg_act_now"] = "Thanks for registering! . Your account is active now";	
+	$lang["core.msg_act_email"] = "¡Gracias por registrarse! Por favor revise su correo y siga el link de activación.";
+	$lang["core.msg_act_validate"] = "¡Gracias por registrarse! Validaremos y activaremos su cuenta pronto.";
+	$lang["core.msg_act_now"] = "¡Gracias por registrarse! Su cuenta ya está activa.";	
 	
 	// button
-	$lang["core.btn_new"] = "New";
+	$lang["core.btn_new"] = "Nuev";
 	$lang["core.btn_savereturn"] = "Save & Return";
 	$lang["core.btn_add"] = "Add";
 	
 	
 	
 	// top menu
-	$lang["core.m_controlpanel"] = "Control Panel";
-	$lang["core.m_myaccount"] = "My Account";
-	$lang["core.m_mainsite"] = "Main site";
-	$lang["core.m_myprofile"] = "My Profile";
+	$lang["core.m_controlpanel"] = "Panel de Control";
+	$lang["core.m_myaccount"] = "Mi Cuenta";
+	$lang["core.m_mainsite"] = "Sitio Principal";
+	$lang["core.m_myprofile"] = "Mis Datos";
 	
 	// dashboard
 	$lang["core.m_sitemenu"] = "Site Menu";
-	$lang["core.m_modules"] = "Modules";
+	$lang["core.m_modules"] = "Módulos";
 	
 	
 	
 	
 	// side menu
-	$lang["core.sm_lastlogin"] = "Last Login";
+	$lang["core.sm_lastlogin"] = "Último Acceso";
 	
 	/**  page  **/
 	$lang["core.pge_icontent"] = "Page Content";
@@ -218,8 +218,8 @@
 	$lang["core.pge_iallowguest"] = "Show for guest / unlogged";
 	$lang["core.pge_istatus"] = "Status";
 	$lang["core.pge_itemplate"] = "Template";
-	
-	$lang["core.pge_imgdim"] = "Image Dimension";
+
+	$lang["core.pge_imgdim"] = "Dimensiones de la imagen";	
 	
 	/** builder **/
 	// config
@@ -354,10 +354,10 @@
 
 
 	$lang["core.mod_thaction"] = "Action";
-
-	$lang["core.login"] = "Log In";	
-	$lang["core.register"] = "Registration";	
 	
+	$lang["core.login"] = "Entrar";
+	$lang["core.register"] = "Registrarse";	
+
 	// updated 1/7/15
 	$lang["core.fr_sociallogin"] = "Social Login";
 	$lang["core.fr_hybridauth"] = "Hybrid Auth";
@@ -369,18 +369,18 @@
 	$lang["core.fr_multilang"] = "Multi Language";
 	
 	$lang["core.tab_security"] = "Security";
-	
+		
 	// Error
-	$lang["core.error_inv_capt"] = "Incorrect Captcha";	
-	$lang["core.error_inv_cred"] = "Invalid email or password combination <br /> or your account is not active yet";	
-	$lang["core.error_cant_find_email"] = "Can't find email address.";
-	$lang["core.error_write_email"] = "Please write your email address.";
-	$lang["core.error_cant_find_code"] = "Can't find your reset code.";
-	$lang["core.error_profile"] = "Ops Something went wrong!";
-	$lang["core.error_inv_code"] = "Invalid Code Activation!";
+	$lang["core.error_inv_capt"] = "Captcha Incorrecto";	
+	$lang["core.error_inv_cred"] = "Combinación de email o password inválida <br /> o su cuenta aún no ha sido activada.";
+	$lang["core.error_cant_find_email"] = "El correo no existe.";
+	$lang["core.error_write_email"] = "Por favor escriba su dirección de correo.";
+	$lang["core.error_cant_find_code"] = "El código de reinicio no existe.";
+	$lang["core.error_profile"] = "Por favor revise el formulario!";
+	$lang["core.error_inv_code"] = "Código de Activación Inválido!";
 
 	// Success
-	$lang["core.success_forgot"] = "Please check your email and follow reset link";
-	$lang["core.success_profile"] = "Your Profile has been updated succesfuly";
-	$lang["core.success_password"] = "Your password has been changed succesfuly";
-	$lang["core.success_acc_act"] = "Your account is active now!";
+	$lang["core.success_forgot"] = "Por favor revise su email. Le hemos enviado un link de reinicio.";
+	$lang["core.success_profile"] = "Su perfil ha sido actualizado correctamente.";
+	$lang["core.success_password"] = "Su password ha sido actualizado correctamente.";
+	$lang["core.success_acc_act"] = "Su cuenta está activada!";

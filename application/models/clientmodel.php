@@ -25,6 +25,13 @@ class Clientmodel extends SB_Model
 		return "   ";
 	}
 
+	function lookup($keyword){  
+        $this->db->select('*')->from('clientes');  
+        $this->db->like('nombre',$keyword,'after');  
+        $query = $this->db->get();      
+           
+        return $query->result();  
+    }
 }
 
 ?>

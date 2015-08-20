@@ -11,6 +11,7 @@ class Orders extends SB_Controller
 		parent::__construct();
 		
 		$this->load->model('ordersmodel');
+		$this->load->model('clientmodel');
 		$this->model = $this->ordersmodel;
 		
 		$this->info = $this->model->makeInfo( $this->module);
@@ -176,4 +177,36 @@ class Orders extends SB_Controller
 			SiteHelpers::alert('success',"ID : ".implode(",",$this->input->post( 'id' , true ))."  , Has Been Removed Successfull"));
 		Redirect('orders',301);
 	}
+
+	public function client_lookup(){  
+        // process posted form data  
+        $keyword = $this->input->post('term');  
+        $data['response'] = 'false'; //Set default response  
+        $query = $this->clientmodel->lookup($keyword); //Search DB  
+        if( ! empty($query) )  
+        {  
+            $data['response'] = 'true'; //Set response  
+            $data['message'] = array(); //Create array  
+            foreach( $query as $row )  
+            {  
+                $data['message'][] = array(   
+                                        'id'=>$row->id_cliente,  
+                                        'value' => $row->id_cliente.', '.$row->nombre.', '.$row->fono_fijo.', '.$row->celular.', '.$row->email.', '.$row->direccion.', '.$row->comuna.', '.$row->direccion_cobro,  
+                                        ''  
+                                     );  //Add a row to array  
+            }  
+        }  
+        if('IS_AJAX')  
+        {  
+            echo json_encode($data); //echo json string if ajax request  
+               
+        }  
+        else  
+        {  
+            //$this->load->view('autocomplete/index',$data); //Load html view of search results  
+            $data['content'] = $this->load->view('orders/index',$data, true );
+		
+    	$this->load->view('layouts/main', $data );
+        }  
+    }
 }

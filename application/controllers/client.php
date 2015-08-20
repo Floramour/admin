@@ -181,6 +181,5 @@ class Client extends SB_Controller
 		$this->session->set_flashdata('message',
 			SiteHelpers::alert('success',"ID : ".implode(",",$this->input->post( 'id' , true ))."  , Has Been Removed Successfull"));
 		Redirect('client',301);
-	}
- 
+	} 
 }

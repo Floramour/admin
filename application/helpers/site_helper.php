@@ -497,7 +497,7 @@ class SiteHelpers
 				break;	
 				
 			case 'file'; 
-				if($required !='0') { $mandatory = 'requred'; }
+				if($required !='0') { $mandatory = 'required'; }
 				$form = "<input  type='file' name='{$field}' id='{$field}' ";
 				$form .= "<?php if(\$row['$field'] =='') echo 'class=\"required\"' ;?> "; 
 				$form .= "style='width:150px !important;' {$attribute} />
@@ -506,7 +506,7 @@ class SiteHelpers
 				break;						
 				
 			case 'radio';
-				if($required !='0') { $mandatory = 'requred'; }
+				if($required !='0') { $mandatory = 'required'; }
 				$opt = explode("|",$option['lookup_query']);
 				$form = '';
 				for($i=0; $i<count($opt);$i++) 
@@ -522,7 +522,7 @@ class SiteHelpers
 				break;
 				
 			case 'checkbox';
-				if($required !='0') { $mandatory = 'requred'; }
+				if($required !='0') { $mandatory = 'required'; }
 				$opt = explode("|",$option['lookup_query']);
 				$form = "<?php \$".$field." = explode(\",\",\$row['".$field."']); ?>";
 				for($i=0; $i<count($opt);$i++) 

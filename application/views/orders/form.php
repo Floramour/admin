@@ -39,6 +39,110 @@
 				
 
 
+<!--pruebas -->
+
+       
+           
+        <style>  
+            /* Autocomplete 
+            ----------------------------------*/  
+            .ui-autocomplete { position: absolute; cursor: default; }     
+            .ui-autocomplete-loading { background: white url('http://jquery-ui.googlecode.com/svn/tags/1.8.2/themes/flick/images/ui-anim_basic_16x16.gif') right center no-repeat; }*/  
+   
+            /* workarounds */  
+            * html .ui-autocomplete { width:1px; } /* without this, the menu expands to 100% in IE6 */  
+   
+            /* Menu 
+            ----------------------------------*/  
+            .ui-menu {  
+                list-style:none;  
+                padding: 2px;  
+                margin: 0;  
+                display:block;  
+            }  
+            .ui-menu .ui-menu {  
+                margin-top: -3px;  
+            }  
+            .ui-menu .ui-menu-item {  
+                margin:0;  
+                padding: 0;  
+                zoom: 1;  
+                float: left;  
+                clear: left;  
+                width: 100%;  
+                font-size:80%;  
+            }  
+            .ui-menu .ui-menu-item a {  
+                text-decoration:none;  
+                display:block;  
+                padding:.2em .4em;  
+                line-height:1.5;  
+                zoom:1;  
+            }  
+            .ui-menu .ui-menu-item a.ui-state-hover,  
+            .ui-menu .ui-menu-item a.ui-state-active {  
+                font-weight: normal;  
+                margin: -1px;  
+            }  
+            span[role=status] {
+    			display: none;
+}
+        </style>  
+           
+        <script type="text/javascript">  
+        $(this).ready( function() {  
+            $("#cli_nombre").autocomplete({  
+                minLength: 1,  
+                source:   
+                function(req, add){  
+                    $.ajax({  
+                        url: "<?php echo base_url(); ?>orders/client_lookup",  
+                        dataType: 'json',  
+                        type: 'POST',  
+                        data: req,  
+                        success:      
+                        function(data){  
+                            if(data.response =="true"){  
+                               add(data.message);                                 
+                            }  
+                        },  
+                    });  
+                },  
+            select:   
+                function(event, ui) {
+                	var fields = ui.item.value.split(/,/);
+					var cli_id_cliente = fields[0];
+					var cli_nombre = fields[1];
+					var cli_fono_fijo = fields[2];
+					var cli_celular = fields[3];
+					var cli_email = fields[4];
+					var cli_direccion = fields[5];
+					var cli_comuna = fields[6];
+					var cli_direccion_cobro = fields[7];
+                	$('#cli_id_cliente').val(cli_id_cliente);
+                	$('#cli_fono_fijo').val(cli_fono_fijo);
+                	$('#cli_celular').val(cli_celular);
+                	$('#cli_email').val(cli_email);
+                	$('#cli_direccion').val(cli_direccion);
+                	$('#cli_comuna').val(cli_comuna);
+                	$('#cli_direccion_cobro').val(cli_direccion_cobro);
+					$('#cli_nombre').val('');
+                	$('#cli_nombre').val(cli_nombre);
+                },        
+            }); 
+         });          
+        </script>  
+
+
+
+        
+
+
+
+
+
+
+<!-- fin pruebas -->
 								  <div class="form-group  " >
 									<label for="Fecha de Pago" class=" control-label col-md-4 text-left"> Fecha de Pago </label>
 									<div class="col-md-8">
@@ -93,6 +197,7 @@
 									  
 					<?php $destino = explode(',',$row['destino']);
 					$destino_opt = array( 'GRAN SANTIAGO' => 'GRAN SANTIAGO' ,  'PROVINCIA' => 'PROVINCIA' ,  'EXTRANJERO' => 'EXTRANJERO' , ); ?>
+					
 					<select name='destino' rows='5'   class='select2 '  > 
 						<?php 
 						foreach($destino_opt as $key=>$val)
@@ -194,17 +299,18 @@
 								  </div> 
 			</div>
 			
-			<div class="tab-pane m-t " id="Cliente-Destinatario"> 
-				<fieldset>
-					<div class="panel panel-primary">
-						<legend>
-							<div class="alert alert-success" role="alert" style="font-size: 13px; margin-left: 15px; margin-right: 15px;">Cliente:</div>
-						</legend>
-						 		  <div class="form-group  " >
+			<div class="tab-pane m-t " id="Cliente-Destinatario">
+				<ul class="nav nav-tabs">
+			        <li class="active"><a data-toggle="tab" href="#client">Cliente</a></li>
+			        <li><a data-toggle="tab" href="#receiver">Destinatario</a></li>			        
+			    </ul>
+			    <div class="tab-content">
+			        <div id="client" class="tab-pane fade in active" style="margin-top:15px;">
+			            		  <div class="form-group  " >
 									<label for="Fecha de Entrega" class=" control-label col-md-4 text-left"> Fecha de Entrega </label>
 									<div class="col-md-8">
 									  
-				<input type='text' class='form-control date' placeholder='' value='<?php echo $row['des_fecha_entrega'];?>' name='des_fecha_entrega'
+										<input type='text' class='form-control date' placeholder='' value='<?php echo $row['des_fecha_entrega'];?>' name='des_fecha_entrega'
 				style='width:150px !important;'	   /> <br />
 									  <i> <small></small></i>
 									 </div> 
@@ -219,17 +325,31 @@
 								  <div class="form-group">
 									<label for="Id Cliente" class=" control-label col-md-4 text-left"> Id Cliente </label>
 									<div class="col-md-8">
-									  <input type='text' class='form-control' placeholder='' value='<?php echo $row['cli_id_cliente'];?>' name='cli_id_cliente' />Buscar: <a href="#search_client" data-toggle="modal" class="fa fa-search"></a><br />
+									  <input type='text' class='form-control' placeholder='' value='<?php echo $row['cli_id_cliente'];?>' name='cli_id_cliente'  id='cli_id_cliente'/><br />
 									  <i> <small></small></i>
 									 </div> 
-								  </div> 					
+								  </div>
 								  <div class="form-group  " >
 									<label for="Nombre" class=" control-label col-md-4 text-left"> Nombre </label>
 									<div class="col-md-8">
-									  <input type='text' class='form-control' placeholder='' value='<?php echo $row['cli_nombre'];?>' name='cli_nombre'   /> <br />
+										<?php  
+							      	  //echo form_input('cli_nombre','','id="cli_nombre"');  
+							      	?>  
+									  <input type='text' class='form-control' placeholder='' value='<?php echo $row['cli_nombre'];?>' name='cli_nombre' id='cli_nombre'  /> <br />
 									  <i> <small></small></i>
 									 </div> 
-								  </div> 					
+								  </div> 				
+								  
+							      <ul>  
+							          <div id="result"></div>  
+							       </ul>  		
+								  <!--div class="form-group  " >
+									<label for="Nombre" class=" control-label col-md-4 text-left"> Nombre </label>
+									<div class="col-md-8">
+									  <input type='text' class='form-control' placeholder='' value='<?php //echo $row['cli_nombre'];?>' name='cli_nombre'   /> <br />
+									  <i> <small></small></i>
+									 </div> 
+								  </div--> 					
 								  <div class="form-group  " >
 									<label for="E-mail" class=" control-label col-md-4 text-left"> E-mail </label>
 									<div class="col-md-8">
@@ -240,46 +360,41 @@
 								  <div class="form-group  " >
 									<label for="Teléfono fijo" class=" control-label col-md-4 text-left"> Teléfono fijo </label>
 									<div class="col-md-8">
-									  <input type='text' class='form-control' placeholder='' value='<?php echo $row['cli_fono_fijo'];?>' name='cli_fono_fijo'   /> <br />
+									  <input type='text' class='form-control' placeholder='' value='<?php echo $row['cli_fono_fijo'];?>' name='cli_fono_fijo'  id='cli_fono_fijo' /> <br />
 									  <i> <small></small></i>
 									 </div> 
 								  </div> 					
 								  <div class="form-group  " >
 									<label for="Teléfono celular" class=" control-label col-md-4 text-left"> Teléfono celular </label>
 									<div class="col-md-8">
-									  <input type='text' class='form-control' placeholder='' value='<?php echo $row['cli_celular'];?>' name='cli_celular'   /> <br />
+									  <input type='text' class='form-control' placeholder='' value='<?php echo $row['cli_celular'];?>' name='cli_celular'  id='cli_celular' /> <br />
 									  <i> <small></small></i>
 									 </div> 
 								  </div> 					
 								  <div class="form-group  " >
 									<label for="Comuna" class=" control-label col-md-4 text-left"> Comuna </label>
 									<div class="col-md-8">
-									  <input type='text' class='form-control' placeholder='' value='<?php echo $row['cli_comuna'];?>' name='cli_comuna'   /> <br />
+									  <input type='text' class='form-control' placeholder='' value='<?php echo $row['cli_comuna'];?>' name='cli_comuna'  id='cli_comuna' /> <br />
 									  <i> <small></small></i>
 									 </div> 
 								  </div> 					
 								  <div class="form-group  " >
 									<label for="Dirección" class=" control-label col-md-4 text-left"> Dirección </label>
 									<div class="col-md-8">
-									  <input type='text' class='form-control' placeholder='' value='<?php echo $row['cli_direccion'];?>' name='cli_direccion'   /> <br />
+									  <input type='text' class='form-control' placeholder='' value='<?php echo $row['cli_direccion'];?>' name='cli_direccion'  id='cli_direccion' /> <br />
 									  <i> <small></small></i>
 									 </div> 
 								  </div> 					
 								  <div class="form-group  " >
 									<label for="Dirección de cobro" class=" control-label col-md-4 text-left"> Dirección de cobro </label>
 									<div class="col-md-8">
-									  <input type='text' class='form-control' placeholder='' value='<?php echo $row['cli_direccion_cobro'];?>' name='cli_direccion_cobro'   /> <br />
+									  <input type='text' class='form-control' placeholder='' value='<?php echo $row['cli_direccion_cobro'];?>' name='cli_direccion_cobro'  id='cli_direccion_cobro' /> <br />
 									  <i> <small></small></i>
 									 </div> 
-								  </div> 					
-					</div>
-				</fieldset>							
-				<fieldset>
-					<div class="panel panel-primary">
-						<legend>
-							<div class="alert alert-success" role="alert" style="font-size: 13px; margin-left: 15px; margin-right: 15px;">Destinatario:</div>
-						</legend>								   							
-								  <div class="form-group  " >
+								  </div>
+			        </div>
+			        <div id="receiver" class="tab-pane fade" style="margin-top:15px;">
+			            		<div class="form-group  " >
 									<label for="Nombre" class=" control-label col-md-4 text-left"> Nombre </label>
 									<div class="col-md-8">
 										<?php $des_ante_nombre = explode(',',$row['des_ante_nombre']);
@@ -344,9 +459,9 @@
 									  <input type='text' class='form-control' placeholder='' value='<?php echo $row['des_codigo_postal'];?>' name='des_codigo_postal'   /> <br />
 									  <i> <small></small></i>
 									 </div> 
-								  </div> 
 								  </div>
-				</fieldset>
+			        </div>
+			    </div>	
 			</div>
 			
 			<div class="tab-pane m-t " id="Productos">
@@ -745,7 +860,7 @@ $(function() {
         var i = $('#p_scents ul').size() + 2;
         
         $('#addScnt').live('click', function() {
-                $('<li class="active"><a data-toggle="tab" href="#product_'+i+'">Producto '+i+'</a></li>').appendTo(scntDiv);
+                $('<li><a data-toggle="tab" href="#product_'+i+'">Producto '+i+'</a></li>').appendTo(scntDiv);
                 i++;
                 return false;
         });
@@ -778,4 +893,5 @@ $(function() {
                 return false;
         });
 });*/
+
 </script>

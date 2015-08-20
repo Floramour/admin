@@ -84,9 +84,9 @@
 									<div class="col-md-8">
 									  
 					<label class='radio radio-inline'>
-					<input type='radio' name='active' value ='1' requred <?php if($row['active'] == '1') echo 'checked="checked"';?> > Activo </label>
+					<input type='radio' name='active' value ='1' required <?php if($row['active'] == '1') echo 'checked="checked"';?> > Activo </label>
 					<label class='radio radio-inline'>
-					<input type='radio' name='active' value ='0' requred <?php if($row['active'] == '0') echo 'checked="checked"';?> > Inactivo </label> <br />
+					<input type='radio' name='active' value ='0' required <?php if($row['active'] == '0') echo 'checked="checked"';?> > Inactivo </label> <br />
 									  <i> <small></small></i>
 									 </div> 
 								  </div> </fieldset>

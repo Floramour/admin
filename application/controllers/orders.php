@@ -182,7 +182,7 @@ class Orders extends SB_Controller
         // process posted form data  
         $keyword = $this->input->post('term');  
         $data['response'] = 'false'; //Set default response  
-        $query = $this->clientmodel->lookup($keyword); //Search DB  
+        $query = $this->clientmodel->client_lookup($keyword); //Search DB  
         if( ! empty($query) )  
         {  
             $data['response'] = 'true'; //Set response  
@@ -203,10 +203,8 @@ class Orders extends SB_Controller
         }  
         else  
         {  
-            //$this->load->view('autocomplete/index',$data); //Load html view of search results  
-            $data['content'] = $this->load->view('orders/index',$data, true );
-		
-    	$this->load->view('layouts/main', $data );
+            $data['content'] = $this->load->view('orders/index',$data, true );		
+    		$this->load->view('layouts/main', $data );
         }  
     }
 }

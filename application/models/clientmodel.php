@@ -25,9 +25,11 @@ class Clientmodel extends SB_Model
 		return "   ";
 	}
 
-	function lookup($keyword){  
+	function client_lookup($keyword){  
         $this->db->select('*')->from('clientes');  
-        $this->db->like('nombre',$keyword,'after');  
+        $this->db->like('nombre',$keyword,'both');
+        $this->db->or_like('email',$keyword,'both');
+        $this->db->or_like('id_cliente',$keyword,'both');
         $query = $this->db->get();      
            
         return $query->result();  

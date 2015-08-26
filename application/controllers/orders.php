@@ -12,6 +12,8 @@ class Orders extends SB_Controller
 		
 		$this->load->model('ordersmodel');
 		$this->load->model('clientmodel');
+		$this->load->model('productsmodel');
+		$this->load->model('products_colorsmodel');
 		$this->model = $this->ordersmodel;
 		
 		$this->info = $this->model->makeInfo( $this->module);
@@ -194,6 +196,49 @@ class Orders extends SB_Controller
                                         'value' => $row->id_cliente.', '.$row->nombre.', '.$row->fono_fijo.', '.$row->celular.', '.$row->email.', '.$row->direccion.', '.$row->comuna.', '.$row->direccion_cobro,  
                                         ''  
                                      );  //Add a row to array  
+            }  
+        }  
+        if('IS_AJAX')
+        {
+            echo json_encode($data); //echo json string if ajax request
+               
+        }
+        else
+        {  
+            $data['content'] = $this->load->view('orders/index',$data, true );
+    		$this->load->view('layouts/main', $data );
+        }
+    }
+
+    public function product_lookup(){  
+        // process posted form data  
+        $keyword = $this->input->post('term');  
+        $data['response'] = 'false'; //Set default response  
+        $query = $this->productsmodel->product_lookup($keyword); //Search DB  
+        if( ! empty($query) )  
+        {  
+            $data['response'] = 'true'; //Set response  
+            $data['message'] = array(); //Create array  
+            foreach( $query as $row )  
+            {
+            	
+            	
+                $data['message'][] = array(   
+                                        'id'=>$row->id_producto,  
+                                        'value' => $row->id_producto.', '.$row->codigo_mall.', '.$row->nombre.', '.$row->descripcion.', '.$row->precio.', '.base_url().'uploads/products/'.$row->foto_chica,
+                                        ''  
+                                     );  //Add a row to array  
+
+                $query_2 = $this->products_colorsmodel->get_product_colors($row->id_producto); // search product colors
+            	foreach( $query_2 as $row2 )  
+            	{
+            		$data['message'] = $row2->id_color;
+            		/*$data['message2'][] = array(   
+                                        'id'=>$row2->id_producto,  
+                                        'value' => $row2->id_color,
+                                        ''  
+                                     );  //Add a row to array  */
+            	}
             }  
         }  
         if('IS_AJAX')  

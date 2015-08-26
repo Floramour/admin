@@ -36,13 +36,6 @@
 				<li class=""><a href="#Productos" data-toggle="tab">Listado de productos - Conducción </a></li>
 				<li class=""><a href="#Facturación" data-toggle="tab">Facturación</a></li>
 				</ul><div class="tab-content"><div class="tab-pane m-t active" id="Orden"> 
-				
-
-
-<!--pruebas -->
-
-       
-           
         <style>  
             /* Autocomplete 
             ----------------------------------*/  
@@ -134,19 +127,55 @@
 				}
             }); 
 
-         });          
+         });
+
+        $(this).ready( function() {  
+            $("#pro_search_1").autocomplete({  
+                minLength: 1,  
+                source:   
+                function(req, add){  
+                    $.ajax({  
+                        url: "<?php echo base_url(); ?>orders/product_lookup",  
+                        dataType: 'json',  
+                        type: 'POST',  
+                        data: req,  
+                        success:      
+                        function(data){  
+                            if(data.response =="true"){
+                            	add(data.message);                            	
+                            }  
+
+                        },  
+                    });  
+                },  
+	            select:   
+	                function(event, ui) {
+	                	var fields = ui.item.value.split(/,/);
+	                	var pro_pro_id_1 = fields[0];
+	                	var pro_codigo_mall_1 = fields[1];
+	                	var pro_nombre_1 = fields[2];
+	                	var pro_descripcion_1 = fields[3];
+	                	var pro_valor_flores_1 = fields[4];
+	                	var pro_img_1 = fields[5];
+	                	$('#pro_pro_id_1').val(pro_pro_id_1);
+	                	$('#pro_codigo_mall_1').val(pro_codigo_mall_1);
+	                	$('#pro_nombre_1').val(pro_nombre_1);
+	                	$('#pro_descripcion_1').val(pro_descripcion_1);
+	                	$('#pro_valor_flores_1').val(pro_valor_flores_1);
+	                	$('#pro_img_1').attr("src",pro_img_1);
+
+	                	//items+="<option value='"+item.ID+"'>"+item.Name+"</option>";
+	                	var items="<option value='1'>hola</option>";
+	                	$("#pro_color_1").append(items); 	
+	                },    
+	            change:function(event){
+				   $("#pro_search_1").val("");  
+				   return false;
+				}
+            }); 
+
+         });         
         </script>  
-
-
-
-        
-
-
-
-
-
-
-<!-- fin pruebas -->
 								  <div class="form-group  " >
 									<label for="Fecha de Pago" class=" control-label col-md-4 text-left"> Fecha de Pago </label>
 									<div class="col-md-8">
@@ -328,9 +357,9 @@
 			    <div class="tab-content">
 			        <div id="client" class="tab-pane fade in active" style="margin-top:15px;">			            		  
 								  <div class="form-group">
-									<label for="Id Cliente" class=" control-label col-md-4 text-left"> Buscar <i class="fa fa-search"></i> </label>
+									<label for="cli_search" class=" control-label col-md-4 text-left"> Buscar <i class="fa fa-search"></i> </label>
 									<div class="col-md-8">
-									  <input type='search' class='form-control' placeholder='Búsqueda por nombre, email e id del cliente' value='' name='cli_search'  id='cli_search'/><br />
+									  <input type='search' class='form-control' placeholder='Búsqueda por nombre, email o id del cliente' value='' name='cli_search'  id='cli_search'/><br />
 									  <i> <small></small></i>
 									 </div> 
 								  </div>	
@@ -403,10 +432,10 @@
 								  </div>
 			        </div>
 			        <div id="receiver" class="tab-pane fade" style="margin-top:15px;">
-			            		<div class="form-group  " >
-									<label for="Nombre" class=" control-label col-md-4 text-left"> Nombre </label>
+			        			  <div class="form-group  " >
+									<label for="Dirección" class=" control-label col-md-4 text-left"> Ante </label>
 									<div class="col-md-8">
-										<?php $des_ante_nombre = explode(',',$row['des_ante_nombre']);
+									  <?php $des_ante_nombre = explode(',',$row['des_ante_nombre']);
 										$des_ante_nombre_opt = array( 'Srta.'=>'Srta.','Sra.'=>'Sra.','Sr.'=>'Sr.','Flia.'=>'Flia.','Sres.'=>'Sres.','RETIRA'=>'RETIRA','Dra.'=>'Dra.','Mrs.'=>'Mrs.','Mr.'=>'Mr.','MATRIMONIO'=>'MATRIMONIO','Dr.'=>'Dr.','Familia'=>'Familia','Mrs. & Mr.'=>'Mrs. & Mr.','Srtas.'=>'Srtas.','Miss'=>'Miss','Ms.'=>'Ms.','Mr. & Mrs.'=>'Mr. & Mrs.','Párvulo'=>'Párvulo','Niño'=>'Niño','Sras.'=>'Sras.','Prvl.'=>'Prvl.','S.'=>'S.','Don'=>'Don','Cabo 1°'=>'Cabo 1°','RETIRAN'=>'RETIRAN','Sra. y Sr.'=>'Sra. y Sr.','Profesora'=>'Profesora','Madre'=>'Madre','Tía'=>'Tía','Family'=>'Family','Reverendo'=>'Reverendo','Tías'=>'Tías','Novia'=>'Novia','Señor'=>'Señor','Lic.'=>'Lic.','Mmes.'=>'Mmes.'); ?>
 										<select name='des_ante_nombre' rows='5'   class='select2 '> 
 											<?php 
@@ -416,6 +445,13 @@
 											}						
 											?>
 										</select><br>
+									  <i> <small></small></i>
+									 </div> 
+								  </div> 
+			            		  <div class="form-group  " >
+									<label for="Nombre" class=" control-label col-md-4 text-left"> Nombre </label>
+									<div class="col-md-8">
+										
 									  <input type='text' class='form-control' placeholder='' value='<?php echo $row['des_nombre'];?>' name='des_nombre'   /> <br />
 									  <i> <small></small></i>
 									 </div> 
@@ -482,39 +518,53 @@
 			    <div class="tab-content">
 			        <div id="products" class="tab-pane fade in active" style="margin-top:15px;">
 
-			        	<ul class="nav nav-tabs" id="p_scents">
-			        		<li><a data-toggle="tab" href="#" id="addScnt">+</a></li>
+			        	<ul class="nav nav-tabs" id="products_tab">
+			        		<li><a data-toggle="tab" href="#" id="add_product">+</a></li>
 			        		<li class="active"><a data-toggle="tab" href="#product_1">Producto 1</a></li>					        
 					    </ul>
 
-					    <div class="tab-content">
-					    	
+					    <div class="tab-content" id="products_form">					    	
 					        <div id="product_1" class="tab-pane fade in active" style="margin-top:15px;">
-					            <div class="form-group">
+					              <div class="form-group">
+									<label for="pro_search_1" class=" control-label col-md-4 text-left"> Buscar <i class="fa fa-search"></i> </label>
+									<div class="col-md-8">
+									  <input type='search' class='form-control' placeholder='Búsqueda por ' value='' name='pro_search_1'  id='pro_search_1'/><br />
+									  <i> <small></small></i>
+									 </div> 
+								  </div>
+								  <div class="form-group">
+									<label for="pro_img_1" class="control-label col-md-4 text-left"> Image </label>
+									<div class="col-md-8">
+									  <img id="pro_img_1" name="pro_img_1" width="80" height="80" border="0" class="img-thumbnail">
+									  <i> <small></small></i>
+									 </div> 
+								  </div>
+								  
+					              <div class="form-group">
 									<label for="Pro Id Producto" class="control-label col-md-4 text-left"> Id </label>
 									<div class="col-md-8">
-									  <input type="text" class="form-control" placeholder="Id único del producto" value="" name="pro_pro_id_1" /> <br />
+									  <input type="number" class="form-control" placeholder="Id único del producto" value="" name="pro_pro_id_1" id="pro_pro_id_1" /> <br />
 									  <i> <small></small></i>
 									 </div> 
 								  </div>
 								  <div class="form-group">
 									<label for="Pro Codigo Mall" class="control-label col-md-4 text-left"> Código mall </label>
 									<div class="col-md-8">
-									  <input type="text" class="form-control" placeholder="" value="<?php echo $row['pro_codigo_mall'];?>" name="pro_codigo_mall_1" /> <br />
+									  <input type="text" class="form-control" placeholder="" value="<?php echo $row['pro_codigo_mall'];?>" name="pro_codigo_mall_1" id="pro_codigo_mall_1" /> <br />
 									  <i> <small></small></i>
 									 </div> 
 								  </div>
 								  <div class="form-group">
 									<label for="Pro Nombre" class="control-label col-md-4 text-left"> Nombre </label>
 									<div class="col-md-8">
-									  <input type="text" class="form-control" placeholder="Nombre del producto" value="" name="pro_nombre_1" /> <br />
+									  <input type="text" class="form-control" placeholder="Nombre del producto" value="" name="pro_nombre_1" id="pro_nombre_1" /> <br />
 									  <i> <small></small></i>
 									 </div> 
 								  </div>
 								  <div class="form-group  " >
 									<label for="Pro Descripcion" class=" control-label col-md-4 text-left"> Descripción </label>
 									<div class="col-md-8">
-									  <textarea name="pro_descripcion_1" rows="2" id="editor" class="form-control markItUp"><?php echo $row['pro_descripcion'] ;?></textarea>
+									  <textarea name="pro_descripcion_1" id="pro_descripcion_1" rows="2" id="editor" class="form-control markItUp"><?php echo $row['pro_descripcion'] ;?></textarea>
 									  <!--input type='text' class='form-control' placeholder='' value='<?php //echo $row['pro_descripcion'];?>' name='pro_descripcion_1'   /> <br /-->
 									  <i> <small></small></i>
 									 </div> 
@@ -529,7 +579,7 @@
 								  <div class="form-group  " >
 									<label for="Pro Valor Flores" class=" control-label col-md-4 text-left"> Valor </label>
 									<div class="col-md-8">
-									  <input type="text" class="form-control" placeholder="0" value="<?php echo $row['pro_valor_flores'];?>" name="pro_valor_flores_1"   /> <br />
+									  <input type="text" class="form-control" placeholder="0" value="<?php echo $row['pro_valor_flores'];?>" name="pro_valor_flores_1" id="pro_valor_flores_1"   /> <br />
 									  <i> <small></small></i>
 									 </div> 
 								  </div>
@@ -538,10 +588,10 @@
 									<div class="col-md-8">
 									  <select name="pro_color_1" rows="5" id="pro_color_1" class="form-control">
 									  	<option value="">-- Please Select --</option>
-										<?php foreach($operadores->result() as $operador) {?>
-										<option value="<?php echo $operador->first_name ." ". $operador->last_name; ?>"
-										 <?php if($row['operador'] == $operador->id ) echo 'selected';?>><?php echo $operador->first_name ." ". $operador->last_name; ?></option>
-										<?php } ?>
+										<?php //foreach($operadores->result() as $operador) {?>
+										<!--option value="<?php //echo $operador->first_name ." ". $operador->last_name; ?>"
+										 <?php //if($row['operador'] == $operador->id ) echo 'selected';?>><?php //echo $operador->first_name ." ". $operador->last_name; ?></option-->
+										<?php //} ?>
 									</select><br />
 									  <i> <small></small></i>
 									 </div> 
@@ -555,11 +605,7 @@
 								  </div--> 	
 					        
 					        </div>
-					    </div>      			  
-						
-							
-						
-					<!--button type="button" class="btn btn-success" style="background-color:#449d44" id="addScnt">Agregar</button-->				    
+					    </div>		    
 			        </div>
 			        
 			        <div id="shipping" class="tab-pane fade" style="margin-top:15px;">
@@ -659,7 +705,7 @@
 								  <div class="form-group  " >
 									<label for="# Tarjeta" class=" control-label col-md-4 text-left"> # Tarjeta </label>
 									<div class="col-md-8">
-									  <input type='text' class='form-control' placeholder='' value='<?php echo $row['tar_numero_tarjeta'];?>' name='tar_numero_tarjeta'   /> <br />
+									  <input type='number' class='form-control' placeholder='' value='<?php echo $row['tar_numero_tarjeta'];?>' name='tar_numero_tarjeta'   /> <br />
 									  <i> <small></small></i>
 									 </div> 
 								  </div> 					
@@ -864,43 +910,23 @@ $(document).ready(function() {
 });
 
 $(function() {
-        var scntDiv = $('#p_scents');
-        var product_form = $('#pro_form');
-        var i = $('#p_scents ul').size() + 2;
+        var products_tab = $('#products_tab');
+        var products_form = $('#products_form');
+        var i = $('#products_tab ul').size() + 2;
         
-        $('#addScnt').live('click', function() {
-                $('<li><a data-toggle="tab" href="#product_'+i+'">Producto '+i+'</a></li>').appendTo(scntDiv);
+        $('#add_product').live('click', function() {
+                $('<li><a data-toggle="tab" href="#product_'+i+'">Producto '+i+'</a></li>').appendTo(products_tab);
+                $('<div id="product_'+i+'" class="tab-pane fade in active" style="margin-top:15px;">sdfsdfsdfsdf</div>').appendTo(products_form);
                 i++;
                 return false;
         });
         
-        $('#remScnt').live('click', function() { 
+        $('#remove_product').live('click', function() { 
                 if( i > 2 ) {
-                        $(this).parents('p').remove();
-                        i--;
-                }
-                return false;
+                    $(this).parents('p').remove();
+                    i--;
+        }
+        return false;
         });
 });
-
-/*
-$(function() {
-        var scntDiv = $('#p_scents');
-        var i = $('#p_scents fieldset').size() + 1;
-
-        $('#addScnt').live('click', function() {
-                $('<fieldset><div class="panel panel-primary"><legend><div class="alert alert-success" role="alert" style="font-size: 13px; margin-left: 15px; margin-right: 15px;">Producto ' + i +':</div></legend><div class="form-group  " ><label for="Pro Descripcion" class=" control-label col-md-4 text-left"> Pro Descripcion </label><div class="col-md-8"><textarea name="pro_descripcion_2341" rows="2" id="editor" class="form-control markItUp "></textarea><br /><i><small></small></i></div></div><div class="form-group"><label for="Pro Codigo Mall" class=" control-label col-md-4 text-left">Pro Codigo Mall</label><div class="col-md-8"><input type="text" class="form-control" placeholder="" value="" name="pro_codigo_mall_' + i +'"  /><br /><i><small></small></i></div></div><div class="form-group  " ><label for="Pro Valor Flores" class=" control-label col-md-4 text-left"> Pro Valor Flores </label><div class="col-md-8"><input type="text" class="form-control" placeholder="" value="" name="pro_valor_flores_' + i +'"   /><br /><i><small></small></i></div></div><div class="form-group  " ><label for="Pro Accesorios" class=" control-label col-md-4 text-left"> Pro Accesorios </label><div class="col-md-8"><input type="text" class="form-control" placeholder="" value="" name="pro_accesorios_' + i +'"   /><br /><i><small></small></i></div></div><button type="button" class="btn btn-danger" id="remScnt">Eliminar</button></div></fieldset>').appendTo(scntDiv);
-                i++;
-                return false;
-        });
-
-        $('#remScnt').live('click', function() { 
-                if( i > 2 ) {
-                        $(this).parents('fieldset').remove();
-                        i--;
-                }
-                return false;
-        });
-});*/
-
 </script>

@@ -24,7 +24,14 @@ class Productsmodel extends SB_Model
 	public static function queryGroup(){
 		return " ORDER BY productos.id_producto DESC  ";
 	}
-	
+
+	function product_lookup($keyword){  
+        $this->db->select('*')->from('productos');  
+        $this->db->like('nombre',$keyword,'both');
+        $query = $this->db->get();      
+           
+        return $query->result();  
+    }
 }
 
 ?>

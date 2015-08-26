@@ -24,7 +24,14 @@ class Products_colorsmodel extends SB_Model
 	public static function queryGroup(){
 		return "   ";
 	}
-	
+
+    function get_product_colors($product_id){  
+        $this->db->select('*')->from('productos_color');
+        $this->db->where('id_producto', $product_id); 
+        $query = $this->db->get();      
+           
+        return $query->result();  
+    }	
 }
 
 ?>

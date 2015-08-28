@@ -26,9 +26,10 @@ class Products_colorsmodel extends SB_Model
 	}
 
     function get_product_colors($product_id){  
-        $this->db->select('*')->from('productos_color');
-        $this->db->where('id_producto', $product_id); 
-        $query = $this->db->get();      
+        $this->db->select('productos_color.*, colores.*')->from('productos_color');
+        $this->db->join('colores', 'colores.id_color = productos_color.id_color');
+        $this->db->where('productos_color.id_producto',$product_id);
+        $query = $this->db->get();
            
         return $query->result();  
     }	

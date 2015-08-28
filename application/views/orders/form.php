@@ -129,7 +129,7 @@
 
          });
 
-        $(this).ready( function() {  
+        /*$(this).ready( function() {  
             $("#pro_search_1").autocomplete({  
                 minLength: 1,  
                 source:   
@@ -162,20 +162,17 @@
 	                	$('#pro_nombre_1').val(pro_nombre_1);
 	                	$('#pro_descripcion_1').val(pro_descripcion_1);
 	                	$('#pro_valor_flores_1').val(pro_valor_flores_1);
-	                	$('#pro_img_1').attr("src",pro_img_1);
-
-	                	//items+="<option value='"+item.ID+"'>"+item.Name+"</option>";
-	                	var items="<option value='1'>hola</option>";
-	                	$("#pro_color_1").append(items); 	
-	                },    
+	                	$('#pro_img_1').attr("src",pro_img_1);	                	
+	                	$('#pro_color_1').load("<?=base_url()?>orders/get_product_colors/" + pro_pro_id_1);
+	                },
 	            change:function(event){
-				   $("#pro_search_1").val("");  
+				   $("#pro_search_1").val("");
 				   return false;
 				}
             }); 
 
-         });         
-        </script>  
+         });*/                 
+        </script>
 								  <div class="form-group  " >
 									<label for="Fecha de Pago" class=" control-label col-md-4 text-left"> Fecha de Pago </label>
 									<div class="col-md-8">
@@ -278,15 +275,7 @@
 									  <input type='number' class='form-control' placeholder='' value='<?php echo $row['boleta'];?>' name='boleta'   /> <br />
 									  <i> <small></small></i>
 									 </div> 
-								  </div>			
-								  <!--div class="form-group  " >
-									<label for="Operador" class=" control-label col-md-4 text-left"> Operador </label>
-									<div class="col-md-8">
-									  <select name='operador' rows='5' id='operador' code='{$operador}' 
-							class='select2 '    ></select> <br />
-									  <i> <small></small></i>
-									 </div> 
-								  </div-->
+								  </div>
 								  <div class="form-group  " >
 									<label for="Operador" class=" control-label col-md-4 text-left"> Operador </label>
 									<div class="col-md-8">
@@ -380,14 +369,7 @@
 								  
 							      <ul>  
 							          <div id="result"></div>  
-							       </ul>  		
-								  <!--div class="form-group  " >
-									<label for="Nombre" class=" control-label col-md-4 text-left"> Nombre </label>
-									<div class="col-md-8">
-									  <input type='text' class='form-control' placeholder='' value='<?php //echo $row['cli_nombre'];?>' name='cli_nombre'   /> <br />
-									  <i> <small></small></i>
-									 </div> 
-								  </div--> 					
+							       </ul>				
 								  <div class="form-group  " >
 									<label for="E-mail" class=" control-label col-md-4 text-left"> E-mail </label>
 									<div class="col-md-8">
@@ -564,8 +546,7 @@
 								  <div class="form-group  " >
 									<label for="Pro Descripcion" class=" control-label col-md-4 text-left"> Descripción </label>
 									<div class="col-md-8">
-									  <textarea name="pro_descripcion_1" id="pro_descripcion_1" rows="2" id="editor" class="form-control markItUp"><?php echo $row['pro_descripcion'] ;?></textarea>
-									  <!--input type='text' class='form-control' placeholder='' value='<?php //echo $row['pro_descripcion'];?>' name='pro_descripcion_1'   /> <br /-->
+									  <textarea name="pro_descripcion_1" id="pro_descripcion_1" rows="2" id="editor" class="form-control markItUp"><?php echo $row['pro_descripcion'] ;?></textarea>									  
 									  <i> <small></small></i>
 									 </div> 
 								  </div>
@@ -587,23 +568,11 @@
 									<label for="Color" class=" control-label col-md-4 text-left"> Color </label>
 									<div class="col-md-8">
 									  <select name="pro_color_1" rows="5" id="pro_color_1" class="form-control">
-									  	<option value="">-- Please Select --</option>
-										<?php //foreach($operadores->result() as $operador) {?>
-										<!--option value="<?php //echo $operador->first_name ." ". $operador->last_name; ?>"
-										 <?php //if($row['operador'] == $operador->id ) echo 'selected';?>><?php //echo $operador->first_name ." ". $operador->last_name; ?></option-->
-										<?php //} ?>
+									  	<option value="">-- Please Select --</option>										
 									</select><br />
 									  <i> <small></small></i>
 									 </div> 
-								  </div> 	 					
-								  <!--div class="form-group  " >
-									<label for="Pro Accesorios" class=" control-label col-md-4 text-left"> Pro Accesorios </label>
-									<div class="col-md-8">
-									  <input type='text' class='form-control' placeholder='' value='<?php //echo $row['pro_accesorios'];?>' name='pro_accesorios_4'   /> <br />
-									  <i> <small></small></i>
-									 </div> 
-								  </div--> 	
-					        
+								  </div>					        
 					        </div>
 					    </div>		    
 			        </div>
@@ -898,9 +867,6 @@ $(document).ready(function() {
 		$("#id_como_ubico").jCombo("<?php echo site_url('orders/comboselect?filter=como_ubico:id_como_ubico:como_ubico') ?>",
 		{  selected_value : '<?php echo $row["id_como_ubico"] ?>' });
 		
-		//$("#operador").jCombo("<?php echo site_url('orders/comboselect?filter=tb_users:id:first_name|last_name') ?>",
-		//{  selected_value : '<?php echo $row["operador"] ?>' });
-		
 		$("#forma_pago").jCombo("<?php echo site_url('orders/comboselect?filter=formas_pago:id_forma_pago:forma_pago') ?>",
 		{  selected_value : '<?php echo $row["forma_pago"] ?>' });
 		
@@ -916,7 +882,7 @@ $(function() {
         
         $('#add_product').live('click', function() {
                 $('<li><a data-toggle="tab" href="#product_'+i+'">Producto '+i+'</a></li>').appendTo(products_tab);
-                $('<div id="product_'+i+'" class="tab-pane fade in active" style="margin-top:15px;">sdfsdfsdfsdf</div>').appendTo(products_form);
+                $('<div id="product_'+i+'" class="tab-pane fade in active" style="margin-top:15px;"><div class="form-group"><label for="pro_search_'+i+'" class="control-label col-md-4 text-left">Buscar <i class="fa fa-search"></i> </label><div class="col-md-8"><input type="search" class="form-control" placeholder="Búsqueda por " value="" name="pro_search_'+i+'"  id="pro_search_'+i+'"/><br /><i><small></small></i></div></div><div class="form-group"><label for="pro_img_'+i+'" class="control-label col-md-4 text-left"> Image </label><div class="col-md-8"><img id="pro_img_'+i+'" name="pro_img_'+i+'" width="80" height="80" border="0" class="img-thumbnail"><i> <small></small></i></div></div></div>').appendTo(products_form);
                 i++;
                 return false;
         });
@@ -929,4 +895,53 @@ $(function() {
         return false;
         });
 });
+
+$('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
+  var target = $(e.target).attr("href") // activated tab
+  alert(target);
+});
+
+$(this).ready( function() {         
+            $("#pro_search_1").autocomplete({  
+                minLength: 1,  
+                source:   
+                function(req, add){  
+                    $.ajax({  
+                        url: "<?php echo base_url(); ?>orders/product_lookup",  
+                        dataType: 'json',  
+                        type: 'POST',  
+                        data: req,  
+                        success:      
+                        function(data){  
+                            if(data.response =="true"){
+                            	add(data.message);                            	
+                            }  
+
+                        },  
+                    });  
+                },  
+	            select:   
+	                function(event, ui) {
+	                	var fields = ui.item.value.split(/,/);
+	                	var pro_pro_id_1 = fields[0];
+	                	var pro_codigo_mall_1 = fields[1];
+	                	var pro_nombre_1 = fields[2];
+	                	var pro_descripcion_1 = fields[3];
+	                	var pro_valor_flores_1 = fields[4];
+	                	var pro_img_1 = fields[5];
+	                	$('#pro_pro_id_1').val(pro_pro_id_1);
+	                	$('#pro_codigo_mall_1').val(pro_codigo_mall_1);
+	                	$('#pro_nombre_1').val(pro_nombre_1);
+	                	$('#pro_descripcion_1').val(pro_descripcion_1);
+	                	$('#pro_valor_flores_1').val(pro_valor_flores_1);
+	                	$('#pro_img_1').attr("src",pro_img_1);	                	
+	                	$('#pro_color_1').load("<?=base_url()?>orders/get_product_colors/" + pro_pro_id_1);
+	                },
+	            change:function(event){
+				   $("#pro_search_1").val("");
+				   return false;
+				}
+            }); 
+
+         });
 </script>

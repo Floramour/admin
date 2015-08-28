@@ -221,24 +221,11 @@ class Orders extends SB_Controller
             $data['message'] = array(); //Create array  
             foreach( $query as $row )  
             {
-            	
-            	
-                $data['message'][] = array(   
+            	$data['message'][] = array(   
                                         'id'=>$row->id_producto,  
                                         'value' => $row->id_producto.', '.$row->codigo_mall.', '.$row->nombre.', '.$row->descripcion.', '.$row->precio.', '.base_url().'uploads/products/'.$row->foto_chica,
                                         ''  
                                      );  //Add a row to array  
-
-                $query_2 = $this->products_colorsmodel->get_product_colors($row->id_producto); // search product colors
-            	foreach( $query_2 as $row2 )  
-            	{
-            		$data['message'] = $row2->id_color;
-            		/*$data['message2'][] = array(   
-                                        'id'=>$row2->id_producto,  
-                                        'value' => $row2->id_color,
-                                        ''  
-                                     );  //Add a row to array  */
-            	}
             }  
         }  
         if('IS_AJAX')  
@@ -251,5 +238,16 @@ class Orders extends SB_Controller
             $data['content'] = $this->load->view('orders/index',$data, true );		
     		$this->load->view('layouts/main', $data );
         }  
+    }
+
+    public function get_product_colors($product_id) {
+    	$query = $this->products_colorsmodel->get_product_colors($product_id); // search product colors
+        $return = "<option value=''>-- Please Select --</option>\n";	
+        foreach( $query as $row ) {
+        	$value = $row->id_color;
+    		$text  = $row->color;
+    		$return .= "<option value='$value'>$text</option>\n";
+        }
+        print $return;
     }
 }

@@ -896,12 +896,19 @@ $(function() {
         });
 });
 
-$('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
+/*$('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
   var target = $(e.target).attr("href") // activated tab
-  alert(target);
-});
+  i = target.replace('#product_','');
+  //alert(i);
+});*/
 
-$(this).ready( function() {         
+$(document).ready(function(){
+    $('a[data-toggle="tab"]').click(function(){
+        alert("The paragraph was clicked.");
+    });
+});
+$(this).ready( function() { 
+
             $("#pro_search_1").autocomplete({  
                 minLength: 1,  
                 source:   

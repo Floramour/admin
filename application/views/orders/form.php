@@ -812,53 +812,25 @@
 </div>		
 </div>	
 </div>
-	<!-- Modal HTML -->
-    <div id="search_client" class="modal fade">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                    <h4 class="modal-title">Búsqueda de clientes</h4>
-                </div>
-                <div class="modal-body">
-                	<form>
-				        <div class="input-group">
-				            <input type="text" class="form-control" placeholder="Nombre del cliente&hellip;">
-				            <span class="input-group-btn">
-				                <button type="button" class="btn btn-default">Buscar</button>
-				            </span>
-				        </div>
-				        <br>
-				        <table class="table table-hover">
-					        <thead>
-					            <tr>
-					                <th>#</th>
-					                <th>ID</th>
-					                <th>Nombre</th>
-					                <th>Email</th>
-					                <th>Acción</th>
-					            </tr>
-					        </thead>
-					        <tbody>
-					            <tr>
-					                <td>1</td>
-					                <td>5426</td>
-					                <td>John</td>
-					                <td>johncarter@mail.com</td>
-					                <td><a>Seleccionar</a></td>
-					            </tr>            
-					        </tbody>
-					    </table>     
-				    </form>				    
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
-                </div>
-            </div>
-        </div>
-    </div>
-			 
+	
+			 <!--button onclick="sendTextToServer()" id="sendButton" status="initial">Send now</button-->
 <script type="text/javascript">
+/*function sendTextToServer(){
+    var $tab = $('#products_form'), $active = $tab.find('.tab-pane.active'), text = $active;
+    //$active.css({"color": "red", "border": "2px solid red"})
+    //$active.hide();
+    activeTab = $active.getAttribute("href");
+  alert(activeTab);
+}
+
+/*var activeTab = null;
+var $tab = $('#products_form'), $active = $tab.find('.tab-pane.active'), text = $active;
+$('a[data-toggle="tab"]').on('shown.bs.tab', function ($tab) {
+
+  activeTab = $tab.target;
+  alert(activeTab);
+})*/
+
 $(document).ready(function() { 
 
 		$("#id_canal").jCombo("<?php echo site_url('orders/comboselect?filter=canales:id_canal:canal') ?>",
@@ -902,11 +874,18 @@ $(function() {
   //alert(i);
 });*/
 
-$(document).ready(function(){
+/*var activeTab = null;
+$('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
+
+  activeTab = e.target;
+  alert(activeTab);
+})*/
+
+/*$(document).ready(function(){
     $('a[data-toggle="tab"]').click(function(){
         alert("The paragraph was clicked.");
     });
-});
+});*/
 $(this).ready( function() { 
 
             $("#pro_search_1").autocomplete({  
@@ -929,6 +908,8 @@ $(this).ready( function() {
                 },  
 	            select:   
 	                function(event, ui) {
+	                	var $tab = $('#products_form'), $active = $tab.find('.tab-pane.active'), text = $active;
+    //$active.css({"color": "red", "border": "2px solid red"})
 	                	var fields = ui.item.value.split(/,/);
 	                	var pro_pro_id_1 = fields[0];
 	                	var pro_codigo_mall_1 = fields[1];

@@ -16,6 +16,8 @@
 <link rel="stylesheet" href="<?php echo base_url();?>sximo/js/plugins/markitup/skins/simple/style.css" type="text/css"  />
 <link rel="stylesheet" href="<?php echo base_url();?>sximo/js/plugins/markitup/sets/default/style.css" type="text/css"  />
 <link rel="stylesheet" href="<?php echo base_url();?>sximo/js/plugins/fancybox/jquery.fancybox.css" type="text/css"  />
+
+<link href="<?php echo base_url();?>sximo/js/plugins/currency-converter/jumbotron-narrow.css" rel="stylesheet">
 	
 <script src="<?php echo base_url();?>sximo/js/plugins/jquery.min.js"></script>
 <script src="<?php echo base_url();?>sximo/js/plugins/jquery.cookie.js"></script>
@@ -35,6 +37,10 @@
 
 <script src="<?php echo base_url();?>sximo/js/plugins/markitup/jquery.markitup.js"></script>
 <script src="<?php echo base_url();?>sximo/js/plugins/markitup/sets/default/set.js"></script>
+
+<script src="<?php echo base_url();?>sximo/js/plugins/currency-converter/extractData.js" type="text/javascript"></script>
+<script src="<?php echo base_url();?>sximo/js/plugins/currency-converter/loadCurrency.js" type="text/javascript"></script>
+<script src="<?php echo base_url();?>sximo/js/plugins/currency-converter/swapCurrency.js" type="text/javascript"></script>
 
 
 <script src="<?php echo base_url();?>sximo/js/sximo.js"></script>

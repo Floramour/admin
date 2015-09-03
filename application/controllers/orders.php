@@ -124,7 +124,6 @@ class Orders extends SB_Controller
 		$this->data['id'] = $id;
 		$this->data['operadores'] = $this->db->get_where('tb_users', array('group_id' => '5'));
 		$flores_db = $this->load->database('800flores', TRUE);
-		//$this->data['operadores'] = $flores_db->get_where('tb_users', array('group_id' => '5'));
 		$this->data['content'] = $this->load->view('orders/form',$this->data, true );		
 	  	$this->load->view('layouts/main', $this->data );
 	

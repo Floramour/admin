@@ -85,7 +85,11 @@
 						<?php else: ?>
 							<?php 
 							$conn = (isset($field['conn']) ? $field['conn'] : array() ) ;
-							echo SiteHelpers::gridDisplay($row->$field['field'] , $field['field'] , $conn ) ?>
+							if ($field['field'] == 'id_orden'):
+								echo anchor(base_url().'tracking/add/'.$row->id_orden, $row->id_orden);
+							else:
+								echo SiteHelpers::gridDisplay($row->$field['field'] , $field['field'] , $conn ) ?>
+							<?php endif; ?>
 						<?php endif; ?>
 					 </td>
 					 <?php endif; ?>

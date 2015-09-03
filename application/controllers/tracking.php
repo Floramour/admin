@@ -119,13 +119,14 @@ class Tracking extends SB_Controller
 		}
 	
 		$this->data['id'] = $id;
+		$this->data['despachadores'] = $this->db->get_where('tb_users', array('group_id' => '6'));
 		$this->data['content'] = $this->load->view('tracking/form',$this->data, true );		
 	  	$this->load->view('layouts/main', $this->data );
 	
 	}
 	
 	function save() {
-		
+
 		$rules = $this->validateForm();
 
 		$this->form_validation->set_rules( $rules );
@@ -133,6 +134,23 @@ class Tracking extends SB_Controller
 		{
 			$data = $this->validatePost();
 			$ID = $this->model->insertRow($data , $this->input->get_post( 'id_orden' , true ));
+
+			# Send confirmation  e-mail
+			if (is_array($this->input->get_post('confirmacionentrega')) && in_array("OK", $this->input->get_post('confirmacionentrega')))
+			{
+			 	$this->load->library('email');
+
+				$this->email->from('floramour@gmail.com', 'Florerías Floramour');
+				$this->email->to('davidmorenoazua@gmail.com'); 
+				$this->email->cc('davidmorenoazua@hotmail.com'); 
+				$this->email->bcc('davidmorenoazua@yahoo.es'); 
+
+				$this->email->subject('Email de confirmación orden de compra: ' . $this->input->get_post( 'id_orden' ));
+				$this->email->message('<p><a href="http://www.floramour.cl"><img title="Florer&iacute;as Floramour" src="http://admin.800flores.cl/ordenes/img/logos_guia_floramour.jpg" alt="Florer&iacute;as Floramour" width="101" height="37" border="0" /></a><br />Estimado Cliente: <br /><br />Nos complace informarle que la orden dirigida a <strong>{Nombre_destinatario}</strong>, ha sido entregada.<br />&nbsp;&nbsp;&nbsp;- Firma la guia de despacho: <strong><em>{Nombre_receptor}</em></strong><br />&nbsp;&nbsp;&nbsp;- <em>Hora de entrega: <strong>{Hora_entrega}</strong> </em><br />&nbsp;&nbsp;&nbsp;- <em>Observaciones: <strong>{Observaciones}</strong></em><br /><br />Agradecemos su preferencia<br /><br />Atte.<br /><br /><strong>Dpto. de Despachos<br />Florerias Floramour Ltda.<br /><a href="http://www.floramour.cl">www.Floramour.cl</a><br />Tel:562 2234 1793 (24 Hrs)<br /></strong><br /><span style="color: red;"><strong>Importante:</strong></span><br />&nbsp;&nbsp;&nbsp;- Para su mayor comodidad, guarde nuestro numero telefonico en su celular.<br />&nbsp;&nbsp;&nbsp;- Atencion 24 horas todo el a&ntilde;o Tel: (562) 2234 1793</p>');	
+
+				$this->email->send();
+			}
+
 			// Input logs
 			if( $this->input->get( 'id_orden' , true ) =='')
 			{

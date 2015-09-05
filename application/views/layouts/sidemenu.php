@@ -74,7 +74,12 @@
 							}
 						}
 						?>									
-					> <i class="<?php echo $menu2['menu_icons'];?>"></i> 
+					> <?php
+						if ($menu2['menu_id'] == 49) {
+							echo '<i class="glyphicons glyphicons-flower">⚘</i>';
+						} else { ?>
+							<i class="<?php echo $menu2['menu_icons'];?>"></i>
+						<?php } ?>
 					<?php	
 					
 						if(CNF_MULTILANG ==1 && isset($menu2['menu_lang']['title'][$this->session->userdata('lang')])):
@@ -120,221 +125,7 @@
 <?php endforeach;?>						
 	</div>
 </nav>
-	<script type="text/javascript">
-    calc_array = new Array();
-		var calcul=0;
-		var pas_ch=0;
-		function $id(id)
-		{
-		        return document.getElementById(id);
-		}
-		function f_calc(id,n)
-		{
-		        if(n=='ce')
-		        {
-		                init_calc(id);
-		        }
-		        else if(n=='=')
-		        {
-		                if(calc_array[id][0]!='=' && calc_array[id][1]!=1)
-		                {
-		                        eval('calcul='+calc_array[id][2]+calc_array[id][0]+calc_array[id][3]+';');
-		                        calc_array[id][0] = '=';
-		                        $id(id+'_result').value=calcul;
-		                        calc_array[id][2]=calcul;
-		                        calc_array[id][3]=0;
-		                }
-		        }
-		        else if(n=='+-')
-		        {
-		                $id(id+'_result').value=$id(id+'_result').value*(-1);
-		                if(calc_array[id][0]=='=')
-		                {
-		                        calc_array[id][2] = $id(id+'_result').value;
-		                        calc_array[id][3] = 0;
-		                }
-		                else
-		                {
-		                        calc_array[id][3] = $id(id+'_result').value;
-		                }
-		                pas_ch = 1;
-		        }
-		        else if(n=='nbs')
-		        {
-		                if($id(id+'_result').value<10 && $id(id+'_result').value>-10)
-		                {
-		                        $id(id+'_result').value=0;
-		                }
-		                else
-		                {
-		                        $id(id+'_result').value=$id(id+'_result').value.slice(0,$id(id+'_result').value.length-1);
-		                }
-		                if(calc_array[id][0]=='=')
-		                {
-		                        calc_array[id][2] = $id(id+'_result').value;
-		                        calc_array[id][3] = 0;
-		                }
-		                else
-		                {
-		                        calc_array[id][3] = $id(id+'_result').value;
-		                }
-		        }
-		        else
-		        {
-		                        if(calc_array[id][0]!='=' && calc_array[id][1]!=1)
-		                        {
-		                                eval('calcul='+calc_array[id][2]+calc_array[id][0]+calc_array[id][3]+';');
-		                                $id(id+'_result').value=calcul;
-		                                calc_array[id][2]=calcul;
-		                                calc_array[id][3]=0;
-		                        }
-		                        calc_array[id][0] = n;
-		        }
-		        if(pas_ch==0)
-		        {
-		                calc_array[id][1] = 1;
-		        }
-		        else
-		        {
-		                pas_ch=0;
-		        }
-		        document.getElementById(id+'_result').focus();
-		        return true;
-		}
-		function add_calc(id,n)
-		{
-		        if(calc_array[id][1]==1)
-		        {
-		                $id(id+'_result').value=n;
-		        }
-		        else
-		        {
-		                $id(id+'_result').value+=n;
-		        }
-		        if(calc_array[id][0]=='=')
-		        {
-		                calc_array[id][2] = $id(id+'_result').value;
-		                calc_array[id][3] = 0;
-		        }
-		        else
-		        {
-		                calc_array[id][3] = $id(id+'_result').value;
-		        }
-		        calc_array[id][1] = 0;
-		        document.getElementById(id+'_result').focus();
-		        return true;
-		}
-		function init_calc(id)
-		{
-		        $id(id+'_result').value=0;
-		        calc_array[id] = new Array('=',1,'0','0',0);
-		        document.getElementById(id+'_result').focus();
-		        return true;
-		}
-		function key_detect_calc(id,evt)
-		{
-		        if((evt.keyCode>95) && (evt.keyCode<106))
-		        {
-		                var nbr = evt.keyCode-96;
-		                add_calc(id,nbr);
-		        }
-		        else if((evt.keyCode>47) && (evt.keyCode<58))
-		        {
-		                var nbr = evt.keyCode-48;
-		                add_calc(id,nbr);
-		        }
-		        else if(evt.keyCode==107)
-		        {
-		                f_calc(id,'+');
-		        }
-		        else if(evt.keyCode==109)
-		        {
-		                f_calc(id,'-');
-		        }
-		        else if(evt.keyCode==106)
-		        {
-		                f_calc(id,'*');
-		        }
-		        else if(evt.keyCode==111)
-		        {
-		                f_calc(id,'');
-		        }
-		        else if(evt.keyCode==110)
-		        {
-		                add_calc(id,'.');
-		        }
-		        else if(evt.keyCode==190)
-		        {
-		                add_calc(id,'.');
-		        }
-		        else if(evt.keyCode==188)
-		        {
-		                add_calc(id,'.');
-		        }
-		        else if(evt.keyCode==13)
-		        {
-		                f_calc(id,'=');
-		        }
-		        else if(evt.keyCode==46)
-		        {
-		                f_calc(id,'ce');
-		        }
-		        else if(evt.keyCode==8)
-		        {
-		                f_calc(id,'nbs');
-		        }
-		        else if(evt.keyCode==27)
-		        {
-		                f_calc(id,'ce');
-		        }
-		        return true;
-		}
-	</script>
-	<style type="text/css">
-		.calculator
-		{
-		        width:300px;
-		        height:300px;
-		        background-color:#eeeeee;
-		        border:2px solid #CCCCCC;
-		        margin:auto;
-		        padding-left:5px;
-		        padding-bottom:5px;
-		}
-		.calculator td
-		{
-		        height:16.66%;
-		}
-		.calc_td_result
-		{
-		        text-align:center;
-		}
-		.calc_result
-		{
-		        width:90%;
-		        text-align:right;
-		}
-		.calc_td_calculs
-		{
-		        text-align:center;
-		}
-		.calc_calculs
-		{
-		        width:90%;
-		        text-align:left;
-		}
-		.calc_td_btn
-		{
-		        width:25%;
-		        height:100%;
-		}
-		.calc_btn
-		{
-		        width:90%;
-		        height:90%;
-		        font-size:20px;
-		}
-	</style>	
+
 	<!-- Modal HTML -->
     <div id="myCalculator" class="modal fade">
         <div class="modal-dialog">
@@ -440,9 +231,14 @@
                     <h4 class="modal-title">Conversor de Divisas</h4>
                 </div>
                 <div class="modal-body">
-                    <body onload="loadCurrency()">
+                    <body>
 				        <div class="container">
-				            
+				            <div class="header">
+				                <ul class="nav nav-pills pull-right">
+				                    <li class="active"><a href="#" onclick="loadCurrency()">Actualizar Divisas</a></li>
+				                </ul>
+				                <h3 class="text-muted">Divisas extraídas directamente desde Yahoo.com</h3>
+				            </div>
 				            <div class="well">    
 				                <p>Ingrese el monto y seleccione la divisa:</p>
 				                
@@ -459,8 +255,9 @@
 				                    <select class="form-control" id="currency_2"></select>
 				                    <button type="button" class="btn btn-success" onclick="extractData()">Calcular Monto</button>
 				                </div>
-				            </div>       
-				        </div>				        
+				            </div> 
+				        </div>	
+				        	        
 				        <script>
 				          (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
 				          (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),

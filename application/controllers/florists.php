@@ -1,24 +1,24 @@
 <?php if (!defined('BASEPATH')) exit('No direct script access allowed');
 
-class Tracking extends SB_Controller 
+class Florists extends SB_Controller 
 {
 
 	protected $layout 	= "layouts/main";
-	public $module 		= 'tracking';
+	public $module 		= 'florists';
 	public $per_page	= '10';
 
 	function __construct() {
 		parent::__construct();
 		
-		$this->load->model('trackingmodel');
-		$this->model = $this->trackingmodel;
+		$this->load->model('floristsmodel');
+		$this->model = $this->floristsmodel;
 		
 		$this->info = $this->model->makeInfo( $this->module);
 		$this->access = $this->model->validAccess($this->info['id']);	
 		$this->data = array_merge( $this->data, array(
 			'pageTitle'	=> 	$this->info['title'],
 			'pageNote'	=>  $this->info['note'],
-			'pageModule'	=> 'tracking',
+			'pageModule'	=> 'florists',
 		));
 		
 		if(!$this->session->userdata('logged_in')) redirect('user/login',301);
@@ -74,7 +74,7 @@ class Tracking extends SB_Controller
 		$this->data['access']		= $this->access;
 		// Render into template
 		
-		$this->data['content'] = $this->load->view('tracking/index',$this->data, true );
+		$this->data['content'] = $this->load->view('florists/index',$this->data, true );
 		
     	$this->load->view('layouts/main', $this->data );
     
@@ -98,7 +98,7 @@ class Tracking extends SB_Controller
 		}
 		
 		$this->data['id'] = $id;
-		$this->data['content'] =  $this->load->view('tracking/view', $this->data ,true);	  
+		$this->data['content'] =  $this->load->view('florists/view', $this->data ,true);	  
 		$this->load->view('layouts/main',$this->data);
 	}
   
@@ -119,14 +119,13 @@ class Tracking extends SB_Controller
 		}
 	
 		$this->data['id'] = $id;
-		$this->data['despachadores'] = $this->db->get_where('tb_users', array('group_id' => '6'));
-		$this->data['content'] = $this->load->view('tracking/form',$this->data, true );		
+		$this->data['content'] = $this->load->view('florists/form',$this->data, true );		
 	  	$this->load->view('layouts/main', $this->data );
 	
 	}
 	
 	function save() {
-
+		
 		$rules = $this->validateForm();
 
 		$this->form_validation->set_rules( $rules );
@@ -134,23 +133,6 @@ class Tracking extends SB_Controller
 		{
 			$data = $this->validatePost();
 			$ID = $this->model->insertRow($data , $this->input->get_post( 'id_orden' , true ));
-
-			# Send confirmation e-mail
-			if (is_array($this->input->get_post('confirmacionentrega')) && in_array("OK", $this->input->get_post('confirmacionentrega')))
-			{
-			 	$this->load->library('email');
-
-				$this->email->from('floramour@gmail.com', 'Florerías Floramour');
-				$this->email->to('davidmorenoazua@gmail.com'); 
-				$this->email->cc('davidmorenoazua@hotmail.com'); 
-				$this->email->bcc('davidmorenoazua@yahoo.es'); 
-
-				$this->email->subject('Email de confirmación orden de compra: ' . $this->input->get_post( 'id_orden' ));
-				$this->email->message('<p><a href="http://www.floramour.cl"><img title="Florer&iacute;as Floramour" src="http://admin.800flores.cl/ordenes/img/logos_guia_floramour.jpg" alt="Florer&iacute;as Floramour" width="101" height="37" border="0" /></a><br />Estimado Cliente: <br /><br />Nos complace informarle que la orden dirigida a <strong>{Nombre_destinatario}</strong>, ha sido entregada.<br />&nbsp;&nbsp;&nbsp;- Firma la guia de despacho: <strong><em>{Nombre_receptor}</em></strong><br />&nbsp;&nbsp;&nbsp;- <em>Hora de entrega: <strong>{Hora_entrega}</strong> </em><br />&nbsp;&nbsp;&nbsp;- <em>Observaciones: <strong>{Observaciones}</strong></em><br /><br />Agradecemos su preferencia<br /><br />Atte.<br /><br /><strong>Dpto. de Despachos<br />Florerias Floramour Ltda.<br /><a href="http://www.floramour.cl">www.Floramour.cl</a><br />Tel:562 2234 1793 (24 Hrs)<br /></strong><br /><span style="color: red;"><strong>Importante:</strong></span><br />&nbsp;&nbsp;&nbsp;- Para su mayor comodidad, guarde nuestro numero telefonico en su celular.<br />&nbsp;&nbsp;&nbsp;- Atencion 24 horas todo el a&ntilde;o Tel: (562) 2234 1793</p>');	
-
-				$this->email->send();
-			}
-
 			// Input logs
 			if( $this->input->get( 'id_orden' , true ) =='')
 			{
@@ -162,9 +144,9 @@ class Tracking extends SB_Controller
 			$this->session->set_flashdata('message',SiteHelpers::alert('success'," Data has been saved succesfuly !"));
 			if($this->input->post('apply'))
 			{
-				redirect( 'tracking/add/'.$ID,301);
+				redirect( 'florists/add/'.$ID,301);
 			} else {
-				redirect( 'tracking',301);
+				redirect( 'florists',301);
 			}			
 			
 			
@@ -189,7 +171,7 @@ class Tracking extends SB_Controller
 		$this->inputLogs("ID : ".implode(",",$this->input->post( 'id' , true ))."  , Has Been Removed Successfull");
 		$this->session->set_flashdata('message',
 			SiteHelpers::alert('success',"ID : ".implode(",",$this->input->post( 'id' , true ))."  , Has Been Removed Successfull"));
-		Redirect('tracking',301);
+		Redirect('florists',301);
 	}
 
 

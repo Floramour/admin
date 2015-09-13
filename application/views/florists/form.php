@@ -36,14 +36,6 @@
 									 </div> 
 								  </div> 					
 								  <div class="form-group  " >
-									<label for="Pro Firma" class=" control-label col-md-4 text-left"> Pro Firma </label>
-									<div class="col-md-8">
-									  <textarea name='pro_firma' rows='2' id='pro_firma' class='form-control '  
-				           ><?php echo $row['pro_firma'] ;?></textarea> <br />
-									  <i> <small></small></i>
-									 </div> 
-								  </div> 					
-								  <div class="form-group  " >
 									<label for="Id Canal" class=" control-label col-md-4 text-left"> Id Canal </label>
 									<div class="col-md-8">
 									  <input type='text' class='form-control' placeholder='' value='<?php echo $row['id_canal'];?>' name='id_canal'   /> <br />

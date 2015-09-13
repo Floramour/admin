@@ -11,6 +11,4 @@ $route["faq"] = "page/index/faq";
 $route["faq/(:any)"] = "page/index/faq/%1";
 $route["portpolio"] = "page/index/portpolio";
 $route["portpolio/(:any)"] = "page/index/portpolio/%1";
-$route["gallery"] = "page/index/gallery";
-$route["gallery/(:any)"] = "page/index/gallery/%1";
 ?>

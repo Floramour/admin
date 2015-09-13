@@ -14,15 +14,15 @@ class Floristsmodel extends SB_Model
 	public static function querySelect(  ){
 		
 		
-		return "  SELECT `ordenes`.`id_orden`, `pro_firma`, `id_canal`, `numero_orden`, `destino`, `fecha_orden`, `boleta`, `guia`, `factura`, `operador`, `cli_nombre`, `des_fecha_entrega`, `des_nombre`, `pro_valor_total`, (SELECT IF(SUM(`ordenes_producto`.`id_florista`) > 0, 1, 0) AS 'Florista Asignado') FROM `ordenes` LEFT JOIN `ordenes_producto` ON `ordenes`.`id_orden` = `ordenes_producto`.`id_orden`  ";
+		return "  SELECT `id_orden`, `id_canal`, `numero_orden`, `destino`, `fecha_orden`, `boleta`, `guia`, `factura`, `operador`, `cli_nombre`, `des_fecha_entrega`, `des_nombre`, `pro_valor_total` FROM `ordenes`  ";
 	}
 	public static function queryWhere(  ){
 		
-		return "  WHERE ordenes.id_orden IS NOT NULL   ";
+		return "  WHERE ordenes.id_orden IS NOT NULL AND `id_orden` IN (SELECT `ordenes`.`id_orden` FROM `ordenes` LEFT JOIN `ordenes_producto` ON `ordenes`.`id_orden` = `ordenes_producto`.`id_orden` GROUP by `ordenes_producto`.`id_orden` HAVING SUM(`ordenes_producto`.`id_florista`) > 0)   ";
 	}
 	
 	public static function queryGroup(){
-		return "  GROUP by `ordenes_producto`.`id_orden` ORDER BY `ordenes_producto`.`id_orden` DESC  ";
+		return " ORDER BY `id_orden` DESC  ";
 	}
 	
 }

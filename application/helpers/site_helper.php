@@ -991,5 +991,7 @@ class SiteHelpers
 
 	}
 	
-		
+	public static function get_floramurines($cantidad_arreglos, $valor_arreglos) {			
+		return ($cantidad_arreglos * 0.6) + ($valor_arreglos * 1.4);
+	}
 }

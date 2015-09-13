@@ -26,12 +26,6 @@
 					</tr>
 				
 					<tr>
-						<td width='30%' class='label-view text-right'>Pro Firma</td>
-						<td><?php echo $row['pro_firma'] ;?> </td>
-						
-					</tr>
-				
-					<tr>
 						<td width='30%' class='label-view text-right'>Canal</td>
 						<td><?php echo SiteHelpers::gridDisplayView($row['id_canal'],'id_canal','1:canales:id_canal:canal') ;?> </td>
 						
@@ -50,7 +44,7 @@
 					</tr>
 				
 					<tr>
-						<td width='30%' class='label-view text-right'>Fecha pedido</td>
+						<td width='30%' class='label-view text-right'>Pedido</td>
 						<td><?php echo $row['fecha_orden'] ;?> </td>
 						
 					</tr>
@@ -86,7 +80,7 @@
 					</tr>
 				
 					<tr>
-						<td width='30%' class='label-view text-right'>Fecha de Entrega</td>
+						<td width='30%' class='label-view text-right'>Entrega</td>
 						<td><?php echo $row['des_fecha_entrega'] ;?> </td>
 						
 					</tr>

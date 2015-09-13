@@ -85,9 +85,7 @@
 						<?php else: ?>
 							<?php 
 							$conn = (isset($field['conn']) ? $field['conn'] : array() ) ;
-							if ($field['field'] == 'pro_firma'):
-								echo "hola";
-							elseif ($field['field'] == 'id_orden'):
+							if ($field['field'] == 'id_orden'):
 								echo anchor(base_url().'orders/show/'.$row->id_orden, $row->id_orden, 'target="new"');												
 							elseif ($field['field'] == 'pro_valor_total'):
 								echo "$ ".number_format((int)$row->pro_valor_total, 0, '.', '.');

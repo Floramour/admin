@@ -28,7 +28,16 @@ class Florists_summary extends SB_Controller
 	function index() 
 	{
 		
-		//echo $this->input->post( 'desde' , true );
+		
+
+		if (empty($this->input->post( 'desde' , true )) || empty($this->input->post( 'hasta' , true ))) {
+			$query_from = date("Y-m-d");
+			$query_to = date("Y-m-d", strtotime(date("Y-m-d").' -1 year'));
+		} else {
+			$query_from = $this->input->post( 'desde' , true );
+			$query_to = $this->input->post( 'hasta' , true );
+		}
+
 		$query = $this->db->query("
 			SELECT CONCAT(tb_users.first_name, ' ', tb_users.last_name) AS nombre, op.id_florista, 
 			(SELECT COUNT(ordenes_producto.id_florista) FROM ordenes_producto WHERE ordenes_producto.id_florista = op.id_florista) AS arreglos, 

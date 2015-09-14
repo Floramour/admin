@@ -27,7 +27,8 @@ class Florists_summary extends SB_Controller
 	
 	function index() 
 	{
-		echo $this->input->post( 'desde' , true );
+		
+		//echo $this->input->post( 'desde' , true );
 		$query = $this->db->query("
 			SELECT CONCAT(tb_users.first_name, ' ', tb_users.last_name) AS nombre, op.id_florista, 
 			(SELECT COUNT(ordenes_producto.id_florista) FROM ordenes_producto WHERE ordenes_producto.id_florista = op.id_florista) AS arreglos, 

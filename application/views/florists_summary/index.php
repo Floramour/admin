@@ -56,22 +56,24 @@
     <table class="table table-striped ">
         <thead>
 			<tr>
-				<th> Maestro </th>
-				<th> Arreglos </th>
-				<th> Valor arreglos (CLP) </th>
-				<th> Floramurines </th>
-				<th> Participación (%) </th>
-				<th> Floramurines (CLP) </th>
-				<th> Bono (CLP)</th>				
+				<th><center>Maestro</center></th>
+				<th><center>Arreglos</center></th>
+				<th><center>Valor arreglos (CLP)</center></th>
+				<th><center>Floramurines</center></th>
+				<th><center>Participación (%)</center></th>
+				<th><center>Floramurines (CLP)</center></th>
+				<th><center>Bono (CLP)</center></th>				
 			  </tr>
         </thead>
 
         <tbody>
 			<?php foreach ($results as $i => $maestro) { ?>
 			<tr>				
-				<td> <?php echo $maestro->nombre; ?> </td>
-				<td> <?php echo $maestro->arreglos; ?> </td>
-				<td> <?php echo $maestro->valor; ?> </td>
+				<td><center><?php echo $maestro->nombre; ?></center></td>
+				<td><center><?php echo $maestro->arreglos; ?></center></td>
+				<td><center><?php echo "$ ".number_format((int)$maestro->valor, 0, '.', '.'); ?></center></td>
+				<td><center><?php echo ($maestro->arreglos * FLORAMURINES_ARREGLOS) + ($maestro->valor * FLORAMURINES_VALOR); ?></center></td>
+				<td><center><?php echo number_format(((($maestro->arreglos * FLORAMURINES_ARREGLOS) + ($maestro->valor * FLORAMURINES_VALOR))*100)/1,3,'.',''); ?></center></td>
 			</tr>
 			<?php } ?>
         </tbody>

@@ -31,30 +31,36 @@
 		<div class="form-group  " >
 			<label for="Desde" class=" control-label col-md-4 text-left"> Desde </label>
 				<div class="col-md-8">									  
-					<input type='text' class='form-control date' placeholder='' value='' name='desde' style='width:150px !important;' /> <br />									  
+					<input type='text' class='form-control date' placeholder='' value='<?php echo $from; ?>' name='desde' style='width:150px !important;' /> <br />									  
 				</div> 
 		</div>
 		<div class="form-group  " >
 			<label for="Hasta" class=" control-label col-md-4 text-left"> Hasta </label>
 				<div class="col-md-8">									  
-					<input type='text' class='form-control date' placeholder='' value='' name='hasta' style='width:150px !important;' /> <br />									  
+					<input type='text' class='form-control date' placeholder='' value='<?php echo $to; ?>' name='hasta' style='width:150px !important;' /> <br />									  
 				</div> 
 		</div>
 		<div class="form-group  " >
 			<label for="Florista" class=" control-label col-md-4 text-left"> Florista </label>
 				<div class="col-md-8">
-				  <select name='florista' rows='5' id='florista' class='form-control '  required>
-						<option value="">-- Please Select --</option>
-						<?php foreach($floristas->result() as $florista) {?>
-							<option value="<?php echo $florista->first_name ." ". $florista->last_name; ?>"
-							 <?php //if($row['florista'] == $operador->id ) echo 'selected';?>><?php echo $florista->first_name ." ". $florista->last_name; ?></option>
+				  <select name='florista' rows='5' id='florista' class='form-control ' >
+						<option value="">Todos los floristas</option>
+						<?php foreach($floristas->result() as $florista) { ?>
+							<option value="<?php echo $florista->id; ?>"
+							 <?php if($florista == $florista->id) echo 'selected';?>><?php echo $florista->first_name ." ". $florista->last_name; ?></option>
 							<?php } ?>
 					</select>					
 				</div> 
 		</div>
+		<div class="form-group">
+			<div class="col-md-8">
+				<button type="submit" class="btn btn-default">Buscar</button>
+			</div>
+		</div>
+	
 	<div class="table-responsive">
     <table class="table table-striped ">
-        <thead>
+    	<thead>
 			<tr>
 				<th><center>Maestro</center></th>
 				<th><center>Arreglos</center></th>

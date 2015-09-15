@@ -27,25 +27,31 @@ class Florists_summary extends SB_Controller
 	
 	function index() 
 	{
-		
-		
-
 		if (empty($this->input->post( 'desde' , true )) || empty($this->input->post( 'hasta' , true ))) {
-			$query_from = date("Y-m-d");
-			$query_to = date("Y-m-d", strtotime(date("Y-m-d").' -1 year'));
+			$query_from = date("Y-m-d", strtotime(date("Y-m-d").' -1 month'));
+			$query_to = date("Y-m-d");
 		} else {
 			$query_from = $this->input->post( 'desde' , true );
 			$query_to = $this->input->post( 'hasta' , true );
 		}
 
+		if (empty($this->input->post( 'florista' , true )))
+			$query_florista = '';
+		else
+			$query_florista = ' AND op.id_florista = ' . $this->input->post( 'florista' , true );
+
+		$this->data['from'] = $query_from;
+		$this->data['to'] = $query_to;
+		$this->data['florista'] = $this->input->post('florista');
+
 		$query = $this->db->query("
 			SELECT CONCAT(tb_users.first_name, ' ', tb_users.last_name) AS nombre, op.id_florista, 
 			(SELECT COUNT(ordenes_producto.id_florista) FROM ordenes_producto WHERE ordenes_producto.id_florista = op.id_florista) AS arreglos, 
-			(SELECT SUM(ordenes_producto.precio) FROM ordenes_producto WHERE ordenes_producto.id_florista = op.id_florista) AS valor, 
-			(SELECT (arreglos * 0.6) + (valor * 1.4)) AS floramurines 
+			(SELECT SUM(ordenes_producto.precio) FROM ordenes_producto WHERE ordenes_producto.id_florista = op.id_florista) AS valor			
 			FROM ordenes 
 			INNER JOIN ordenes_producto op ON ordenes.id_orden = op.id_orden 
 			INNER JOIN tb_users ON tb_users.id = op.id_florista
+			WHERE fecha_orden BETWEEN '" . $query_from . "' AND '" . $query_to . "' " . $query_florista . "
 			GROUP BY op.id_florista"
 		);
 		$this->data['results'] = $query->result();

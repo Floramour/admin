@@ -66,7 +66,7 @@
 								  <div class="form-group  " >
 									<label for="Despachador" class=" control-label col-md-4 text-left"> Despachador </label>
 									<div class="col-md-8">
-									  <select name='seg_despachador' rows='5' id='seg_despachador' class='form-control ' required>
+									  <select name='seg_despachador' rows='5' id='seg_despachador' class='form-control '>
 									  	<option value="">-- Please Select --</option>
 										<?php foreach($despachadores->result() as $despachador) {?>
 										<option value="<?php echo $despachador->id; ?>"
@@ -79,14 +79,14 @@
 								  <div class="form-group  " >
 									<label for="Hora de Salida" class=" control-label col-md-4 text-left"> Hora de Salida </label>
 									<div class="col-md-8">
-									  <input type='time' class='form-control' placeholder='' value='<?php echo $row['seg_salida'] != "00:00:00" ? $row['seg_salida'] : "";?>' name='seg_salida' required /> <br />
+									  <input type='time' class='form-control' placeholder='' value='<?php echo $row['seg_salida'] != "00:00:00" ? $row['seg_salida'] : "";?>' name='seg_salida' /> <br />
 									  <i> <small></small></i>
 									 </div> 
 								  </div> 					
 								  <div class="form-group  " >
 									<label for="Hora de Entrega" class=" control-label col-md-4 text-left"> Hora de Entrega </label>
 									<div class="col-md-8">
-									  <input type='time' class='form-control' placeholder='' value='<?php echo $row['seg_entrega'] != "00:00:00" ? $row['seg_entrega'] : "";?>' name='seg_entrega' required /> <br />
+									  <input type='time' class='form-control' placeholder='' value='<?php echo $row['seg_entrega'] != "00:00:00" ? $row['seg_entrega'] : "";?>' name='seg_entrega' /> <br />
 									  <i> <small></small></i>
 									 </div> 
 								  </div> 					

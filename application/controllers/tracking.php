@@ -132,8 +132,7 @@ class Tracking extends SB_Controller
 		$this->form_validation->set_rules( $rules );
 		if( $this->form_validation->run() )
 		{
-			$data = $this->validatePost();
-			$ID = $this->model->insertRow($data , $this->input->get_post( 'id_orden' , true ));
+			$data = $this->validatePost();		
 
 			# Send confirmation e-mail
 			if (is_array($this->input->get_post('confirmacionentrega')) && in_array("OK", $this->input->get_post('confirmacionentrega')))
@@ -149,7 +148,12 @@ class Tracking extends SB_Controller
 				$this->email->message('<p><a href="http://www.floramour.cl"><img title="Florer&iacute;as Floramour" src="http://admin.800flores.cl/ordenes/img/logos_guia_floramour.jpg" alt="Florer&iacute;as Floramour" width="101" height="37" border="0" /></a><br />Estimado Cliente: <br /><br />Nos complace informarle que la orden dirigida a <strong>{Nombre_destinatario}</strong>, ha sido entregada.<br />&nbsp;&nbsp;&nbsp;- Firma la guia de despacho: <strong><em>{Nombre_receptor}</em></strong><br />&nbsp;&nbsp;&nbsp;- <em>Hora de entrega: <strong>{Hora_entrega}</strong> </em><br />&nbsp;&nbsp;&nbsp;- <em>Observaciones: <strong>{Observaciones}</strong></em><br /><br />Agradecemos su preferencia<br /><br />Atte.<br /><br /><strong>Dpto. de Despachos<br />Florerias Floramour Ltda.<br /><a href="http://www.floramour.cl">www.Floramour.cl</a><br />Tel:562 2234 1793 (24 Hrs)<br /></strong><br /><span style="color: red;"><strong>Importante:</strong></span><br />&nbsp;&nbsp;&nbsp;- Para su mayor comodidad, guarde nuestro numero telefonico en su celular.<br />&nbsp;&nbsp;&nbsp;- Atencion 24 horas todo el a&ntilde;o Tel: (562) 2234 1793</p>');	
 
 				$this->email->send();
+
+				$data2 = array('confirmacionemail' => 'OK');
+				$data = array_merge($data, $data2);
 			}
+
+			$ID = $this->model->insertRow($data , $this->input->get_post( 'id_orden' , true ));
 
 			// Input logs
 			if( $this->input->get( 'id_orden' , true ) =='')
@@ -166,7 +170,6 @@ class Tracking extends SB_Controller
 			} else {
 				redirect( 'tracking',301);
 			}			
-			
 			
 		} else {
 			$data =	array(

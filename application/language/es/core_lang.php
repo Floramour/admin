@@ -23,7 +23,7 @@
 	$lang["core.lastname"] = "Apellido";
 	$lang["core.lastlogin"] = "Último Acceso";
 	$lang["core.personalinfo"] = "Información Personal ";
-	$lang["core.changepassword"] = "Change Password";
+	$lang["core.changepassword"] = "Cambiar mi Password";
 	$lang["core.registernew"] = "Register New Account ";
 	
 /* grid , pagination */

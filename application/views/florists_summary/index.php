@@ -73,15 +73,34 @@
         </thead>
 
         <tbody>
+        	<?php 
+        	$total_asignados = 0; 
+        	$total_no_asignados = 0;
+        	$total_periodo = 0;
+        	?>
 			<?php foreach ($results as $i => $maestro) { ?>
 			<tr>				
 				<td><center><?php echo $maestro->nombre; ?></center></td>
-				<td><center><?php echo $maestro->arreglos; ?></center></td>
+				<td><center><?php echo $maestro->arreglos; $total_asignados = $total_asignados + $maestro->arreglos; ?></center></td>
 				<td><center><?php echo "$ ".number_format((int)$maestro->valor, 0, '.', '.'); ?></center></td>
 				<td><center><?php echo ($maestro->arreglos * FLORAMURINES_ARREGLOS) + ($maestro->valor * FLORAMURINES_VALOR); ?></center></td>
 				<td><center><?php echo number_format(((($maestro->arreglos * FLORAMURINES_ARREGLOS) + ($maestro->valor * FLORAMURINES_VALOR))*100)/1,3,'.',''); ?></center></td>
-			</tr>
+				<td><center></center></td>
+				<td><center><?php echo number_format(($maestro->arreglos * FLORAMURINES_ARREGLOS) + ($maestro->valor * FLORAMURINES_VALOR) / 100,3,'.','');; ?></center></td>
 			<?php } ?>
+			</tr>
+			<tr>
+				<td><center>Total Asignados</center></td>
+				<td><center><?php echo $total_asignados; ?></center></td>
+			</tr>
+			<tr>
+				<td><center>Total NO Asignados</center></td>
+				<td><center><?php echo $total_no_asignados; ?></center></td>
+			</tr>
+			<tr>
+				<td><center>Total Períodos</center></td>
+				<td><center><?php echo $total_periodo; ?></center></td>
+			</tr>			
         </tbody>
 
     </table>

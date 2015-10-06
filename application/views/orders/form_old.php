@@ -173,12 +173,6 @@
 
          });*/                 
         </script>
-        <div id="main">
-        <input type="button" id="btAdd" value="Add Element" class="bt" />
-        <input type="button" id="btRemove" value="Remove Element" class="bt" />
-        <input type="button" id="btRemoveAll" value="Remove All" class="bt" /><br />
-    </div>
-    <div id="showvalues"></div>
 								  <div class="form-group  " >
 									<label for="Fecha de Pago" class=" control-label col-md-4 text-left"> Fecha de Pago </label>
 									<div class="col-md-8">
@@ -827,15 +821,15 @@
     //$active.hide();
     activeTab = $active.getAttribute("href");
   alert(activeTab);
-}*/
+}
 
-var activeTab = null;
+/*var activeTab = null;
 var $tab = $('#products_form'), $active = $tab.find('.tab-pane.active'), text = $active;
 $('a[data-toggle="tab"]').on('shown.bs.tab', function ($tab) {
 
   activeTab = $tab.target;
   alert(activeTab);
-})
+})*/
 
 $(document).ready(function() { 
 
@@ -859,9 +853,7 @@ $(function() {
         var i = $('#products_tab ul').size() + 2;
         
         $('#add_product').live('click', function() {
-		//$("#add_product").click(function(){        	
-                //$('<li><a data-toggle="tab" href="#product_2">Producto '+i+'</a></li>').appendTo(products_tab);
-                $('<li><a data-toggle="tab" href="#product_'+i+'" id="product_'+i+'">Producto '+i+'</a></li>').appendTo(products_tab);
+                $('<li><a data-toggle="tab" href="#product_'+i+'">Producto '+i+'</a></li>').appendTo(products_tab);
                 $('<div id="product_'+i+'" class="tab-pane fade in active" style="margin-top:15px;"><div class="form-group"><label for="pro_search_'+i+'" class="control-label col-md-4 text-left">Buscar <i class="fa fa-search"></i> </label><div class="col-md-8"><input type="search" class="form-control" placeholder="Búsqueda por " value="" name="pro_search_'+i+'"  id="pro_search_'+i+'"/><br /><i><small></small></i></div></div><div class="form-group"><label for="pro_img_'+i+'" class="control-label col-md-4 text-left"> Image </label><div class="col-md-8"><img id="pro_img_'+i+'" name="pro_img_'+i+'" width="80" height="80" border="0" class="img-thumbnail"><i> <small></small></i></div></div></div>').appendTo(products_form);
                 i++;
                 return false;
@@ -940,115 +932,4 @@ $(this).ready( function() {
             }); 
 
          });
-
-
-$(document).ready(function() {
- 	var iCnt = 0; 
- 	var container = $(document.createElement('div')).css({padding: '5px', margin: '20px', width: '200px',overflow: 'hidden', border: '1px dashed',borderTopColor: '#999', borderBottomColor: '#999',borderLeftColor: '#999', borderRightColor: '#999', font: '13px verdana'});
- 	$('#btAdd').click(function() { 
- 		if (iCnt <= 19) {
- 			iCnt = iCnt + 2; 
- 			$('#products_tab').append('<li><a data-toggle="tab" href="#product_'+iCnt+'" id="product_'+iCnt+'">Producto '+iCnt+'</a></li>'); 
- 			if (iCnt == 1) { 
- 				var divSubmit = $(document.createElement('div')); 
- 				$(divSubmit).append('<input type=button class="bt" onclick="GetTextValue()" id=btSubmit value=Submit />'); 
- 			} 
- 			$('#main').after(container, divSubmit);
- 		} else {
- 			$(container).append('<label>Reached the limit</label>'); 
- 			$('#btAdd').attr('class', 'bt-disable'); 
- 			$('#btAdd').attr('disabled', 'disabled');
- 		}
- 	});
-
- 	$('#btRemove').click(function() {
- 		if (iCnt != 0) { 
- 			$('#tb' + iCnt).remove(); 
- 			iCnt = iCnt - 1; 
- 		} 
- 		if (iCnt == 0) { 
- 			$(container).empty(); 
- 			$(container).remove(); 
- 			$('#btSubmit').remove(); 
- 			$('#btAdd').removeAttr('disabled'); 
- 			$('#btAdd').attr('class', 'bt') 
- 		}
- 	});
-
- 	$('#btRemoveAll').click(function() {
- 		$(container).empty(); 
- 		$(container).remove(); 
- 		$('#btSubmit').remove(); 
- 		iCnt = 0; 
- 		$('#btAdd').removeAttr('disabled'); 
- 		$('#btAdd').attr('class', 'bt');
- 	});
- });
-
-var divValue, values = ''; 
-
-function GetTextValue() {
-	$(divValue).empty(); 
-	$(divValue).remove(); 
-	values = ''; 
-	$('.input').each(function() { 
-		divValue = $(document.createElement('div')).css({padding: '5px', width: '200px'}); values += this.value + '<br />'});
-	$(divValue).append('<p><b>Your selected values</b></p>' + values);$('#showvalues').append(divValue);
-}
-
-
- /*$(document).ready(function() {
- 	var iCnt = 0; 
- 	var container = $(document.createElement('div')).css({padding: '5px', margin: '20px', width: '200px',overflow: 'hidden', border: '1px dashed',borderTopColor: '#999', borderBottomColor: '#999',borderLeftColor: '#999', borderRightColor: '#999', font: '13px verdana'});
- 	$('#btAdd').click(function() { 
- 		if (iCnt <= 19) {
- 			iCnt = iCnt + 1; 
- 			$(container).append('<input type=text class="input" id=tb' + iCnt + ' value="Text Element ' + iCnt + '" />'); 
- 			if (iCnt == 1) { 
- 				var divSubmit = $(document.createElement('div')); 
- 				$(divSubmit).append('<input type=button class="bt" onclick="GetTextValue()" id=btSubmit value=Submit />'); 
- 			} 
- 			$('#main').after(container, divSubmit);
- 		} else {
- 			$(container).append('<label>Reached the limit</label>'); 
- 			$('#btAdd').attr('class', 'bt-disable'); 
- 			$('#btAdd').attr('disabled', 'disabled');
- 		}
- 	});
-
- 	$('#btRemove').click(function() {
- 		if (iCnt != 0) { 
- 			$('#tb' + iCnt).remove(); 
- 			iCnt = iCnt - 1; 
- 		} 
- 		if (iCnt == 0) { 
- 			$(container).empty(); 
- 			$(container).remove(); 
- 			$('#btSubmit').remove(); 
- 			$('#btAdd').removeAttr('disabled'); 
- 			$('#btAdd').attr('class', 'bt') 
- 		}
- 	});
-
- 	$('#btRemoveAll').click(function() {
- 		$(container).empty(); 
- 		$(container).remove(); 
- 		$('#btSubmit').remove(); 
- 		iCnt = 0; 
- 		$('#btAdd').removeAttr('disabled'); 
- 		$('#btAdd').attr('class', 'bt');
- 	});
- });
-
-var divValue, values = ''; 
-
-function GetTextValue() {
-	$(divValue).empty(); 
-	$(divValue).remove(); 
-	values = ''; 
-	$('.input').each(function() { 
-		divValue = $(document.createElement('div')).css({padding: '5px', width: '200px'}); values += this.value + '<br />'});
-	$(divValue).append('<p><b>Your selected values</b></p>' + values);$('#showvalues').append(divValue);
-}*/
-
 </script>

@@ -83,6 +83,9 @@
         </style>  
            
         <script type="text/javascript">  
+
+
+
         $(this).ready( function() {  
             $("#cli_search").autocomplete({  
                 minLength: 1,  
@@ -129,6 +132,30 @@
 
          });
 
+		$(this).ready( function() {  
+            $("#des_chile").click(function(){  
+                alert('hola');
+            }); 
+
+         });
+
+
+		 /* jQuery that loads shipping zones and prices */
+/*$('#des_chile').live('click', function() {
+       		
+    		alert('Máximmoasdasdasd de 10 productos para la orden.');    		
+		});
+/*$(document).ready(function() {
+  $("#checkbox_div input:radio").click(function() {
+
+    alert("clicked");
+    
+   });
+  
+  $("input:radio:first").prop("checked", true).trigger("click");
+  
+})*/
+
         /*$(this).ready( function() {  
             $("#pro_search_1").autocomplete({  
                 minLength: 1,  
@@ -172,13 +199,7 @@
             }); 
 
          });*/                 
-        </script>
-        <div id="main">
-        <input type="button" id="btAdd" value="Add Element" class="bt" />
-        <input type="button" id="btRemove" value="Remove Element" class="bt" />
-        <input type="button" id="btRemoveAll" value="Remove All" class="bt" /><br />
-    </div>
-    <div id="showvalues"></div>
+        </script>        
 								  <div class="form-group  " >
 									<label for="Fecha de Pago" class=" control-label col-md-4 text-left"> Fecha de Pago </label>
 									<div class="col-md-8">
@@ -508,7 +529,17 @@
 
 			        	<ul class="nav nav-tabs" id="products_tab">
 			        		<li><a data-toggle="tab" href="#" id="add_product">+</a></li>
-			        		<li class="active"><a data-toggle="tab" href="#product_1">Producto 1</a></li>					        
+			        		<li class="active" id="tab_product_1"><a data-toggle="tab" href="#product_1">Producto 1</a></li>
+			        		<li class="active" id="tab_product_2" style="display: none;"><a data-toggle="tab" href="#product_2" >Producto 2</a></li>
+			        		<li class="active" id="tab_product_3" style="display: none;"><a data-toggle="tab" href="#product_3" >Producto 3</a></li>
+			        		<li class="active" id="tab_product_4" style="display: none;"><a data-toggle="tab" href="#product_4" >Producto 4</a></li>
+			        		<li class="active" id="tab_product_5" style="display: none;"><a data-toggle="tab" href="#product_5" >Producto 5</a></li>
+			        		<li class="active" id="tab_product_6" style="display: none;"><a data-toggle="tab" href="#product_6" >Producto 6</a></li>
+			        		<li class="active" id="tab_product_7" style="display: none;"><a data-toggle="tab" href="#product_7" >Producto 7</a></li>
+			        		<li class="active" id="tab_product_8" style="display: none;"><a data-toggle="tab" href="#product_8" >Producto 8</a></li>
+			        		<li class="active" id="tab_product_9" style="display: none;"><a data-toggle="tab" href="#product_9" >Producto 9</a></li>
+			        		<li class="active" id="tab_product_10" style="display: none;"><a data-toggle="tab" href="#product_10" >Producto 10</a></li>
+			        		<li><a data-toggle="tab" href="#" id="remove_product">-</a></li>
 					    </ul>
 
 					    <div class="tab-content" id="products_form">					    	
@@ -582,54 +613,58 @@
 					        </div>
 					    </div>		    
 			        </div>
-			        
+<!--script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script-->
+			        <script type="text/javascript">
+       
+			        </script>
 			        <div id="shipping" class="tab-pane fade" style="margin-top:15px;">
-			            
+			            		
 			            		<div class="form-group  " >
-									<label for="Conducción" class=" control-label col-md-4 text-left"> Destino </label>
-									<div class="col-md-8">
-									  <label class='radio radio-inline'>
-										<input type='radio' name='conduccion_chile' value ='Chile' checked> Chile </label>
-										<label class='radio radio-inline'>
-										<input type='radio' name='conduccion_extranjero' value ='Extranjero'> Extranjero </label><br /><br />
-										<select name='operador' rows='5' id='operador' class='form-control '  required>
-										  	<option value="">-- Please Select --</option>
-											<?php foreach($operadores->result() as $operador) {?>
-											<option value="<?php echo $operador->first_name ." ". $operador->last_name; ?>"
-											<?php if($row['operador'] == $operador->id ) echo 'selected';?>><?php echo $operador->first_name ." ". $operador->last_name; ?></option>
-											<?php } ?>
-										</select>
+									<label for="Destino" class=" control-label col-md-4 text-left"> Destino </label>
+									<div class="col-md-8" id="checkbox_div">
+									  <!--label class='radio radio-inline'-->
+										<!--input type='radio' name='conduccion_chile' value ='Chile' -->
+										<input name="des_chile" checked="checked" type="radio" value="SI"/> Chile<!--/label>
+										<label class='radio radio-inline' -->
+										<!--input type='radio' name='conduccion_extranjero' value ='Extranjero'-->
+										<input name="des_chile" type="radio" value="NO" /> Extranjero<!--/label--><br /><br />
+										
 									  <i> <small></small></i>
 									 </div> 
 								  </div>
-								  <div class="form-group  " >
-									<label for="Operador" class=" control-label col-md-4 text-left"> Operador </label>
-									<div class="col-md-8">
-									  <br />
-									  <i> <small></small></i>
-									 </div> 
-								  </div>
-								  <div class="form-group  " >
+								  <script>
+				  /*function fncMustraDes(valor){
+				  	if(valor=='SI'){
+						alert('si');
+					}else{
+						alert('no');
+					}
+				  }*/
+				  </script>
+								  <div class="form-group">
 									<label for="Conducción" class=" control-label col-md-4 text-left"> Conducción </label>
-									<div class="col-md-8">
-									  <input type='text' class='form-control' placeholder='$' value='<?php echo $row['pro_conduccion'];?>' name='pro_conduccion'   /> <br />
-									  <i> <small></small></i>
-									 </div> 
-								  </div> 					
-								  <div class="form-group  " >
-									<label for="Convenio" class=" control-label col-md-4 text-left"> Convenio </label>
-									<div class="col-md-8">
-									  <input type='text' class='form-control' placeholder='$' value='<?php echo $row['pro_convenio'];?>' name='pro_convenio'   /> <br />
-									  <i> <small></small></i>
-									 </div> 
-								  </div> 					
-								  <div class="form-group  " >
-									<label for="" class=" control-label col-md-4 text-left">  </label>
-									<div class="col-md-8">
-									  <input type='text' class='form-control' placeholder='' value='<?php echo $row['pro_porcentaje'];?>' name='pro_porcentaje'   /> <br />
-									  <i> <small></small></i>
-									 </div> 
-								  </div> 					
+									<div class="input-group" style="padding-left: 16px;">
+									  <div class="input-group-addon">$</div>	
+									  <input type='text' class='form-control' placeholder='$' value='<?php echo $row['pro_conduccion'];?>' name='pro_conduccion'  style="max-width: 100px;" /> <br />
+									  <select name='operador' rows='5' id='operador' class='form-control '  required>
+										  	<option value="">-- Please Select --</option>
+											<?php //foreach($localidades->result() as $operador) {?>
+											<option value="<?php //echo $operador->T20_localidad; ?>"
+											<?php //if($row['operador'] == $operador->T20_id_localidad ) echo 'selected';?>><?php //echo $operador->T20_localidad; ?></option>
+											<?php //} ?>
+										</select>
+									</div>
+								  </div> 	
+
+								  <div class="form-group">
+								  	<label for="Convenio" class=" control-label col-md-4 text-left"> Convenio </label>
+								  	<div class="input-group" style="padding-left: 16px;">
+								      <div class="input-group-addon">%</div>
+								      <input type="text" class="form-control" id="exampleInputAmount" placeholder="Valor" value='<?php echo $row['pro_porcentaje'];?>' name='pro_porcentaje' style="max-width: 65px;">  								   
+									  <div class="input-group-addon">$</div>
+								  	  <input type="text" class="form-control" id="exampleInputAmount2" placeholder="Valor" value='<?php echo $row['pro_convenio'];?>' name='pro_convenio' style="max-width: 100px;">			
+								  	</div>
+								  </div>	
 								  <div class="form-group  " >
 									<label for="Total" class=" control-label col-md-4 text-left"> Total </label>
 									<div class="col-md-8">
@@ -819,23 +854,9 @@
 </div>	
 </div>
 	
-			 <!--button onclick="sendTextToServer()" id="sendButton" status="initial">Send now</button-->
+			 
 <script type="text/javascript">
-/*function sendTextToServer(){
-    var $tab = $('#products_form'), $active = $tab.find('.tab-pane.active'), text = $active;
-    //$active.css({"color": "red", "border": "2px solid red"})
-    //$active.hide();
-    activeTab = $active.getAttribute("href");
-  alert(activeTab);
-}*/
 
-var activeTab = null;
-var $tab = $('#products_form'), $active = $tab.find('.tab-pane.active'), text = $active;
-$('a[data-toggle="tab"]').on('shown.bs.tab', function ($tab) {
-
-  activeTab = $tab.target;
-  alert(activeTab);
-})
 
 $(document).ready(function() { 
 
@@ -854,46 +875,32 @@ $(document).ready(function() {
 });
 
 $(function() {
-        var products_tab = $('#products_tab');
-        var products_form = $('#products_form');
-        var i = $('#products_tab ul').size() + 2;
+
+        var i;
+        i = 2;
         
-        $('#add_product').live('click', function() {
-		//$("#add_product").click(function(){        	
-                //$('<li><a data-toggle="tab" href="#product_2">Producto '+i+'</a></li>').appendTo(products_tab);
-                $('<li><a data-toggle="tab" href="#product_'+i+'" id="product_'+i+'">Producto '+i+'</a></li>').appendTo(products_tab);
-                $('<div id="product_'+i+'" class="tab-pane fade in active" style="margin-top:15px;"><div class="form-group"><label for="pro_search_'+i+'" class="control-label col-md-4 text-left">Buscar <i class="fa fa-search"></i> </label><div class="col-md-8"><input type="search" class="form-control" placeholder="Búsqueda por " value="" name="pro_search_'+i+'"  id="pro_search_'+i+'"/><br /><i><small></small></i></div></div><div class="form-group"><label for="pro_img_'+i+'" class="control-label col-md-4 text-left"> Image </label><div class="col-md-8"><img id="pro_img_'+i+'" name="pro_img_'+i+'" width="80" height="80" border="0" class="img-thumbnail"><i> <small></small></i></div></div></div>').appendTo(products_form);
-                i++;
-                return false;
-        });
+
+       $('#add_product').live('click', function() {
+       		if (i <=10) {
+	    		$('#tab_product_'+i).show();
+	    		i++;
+    		} else
+    		alert('Máximo de 10 productos para la orden.');    		
+		});
         
-        $('#remove_product').live('click', function() { 
-                if( i > 2 ) {
-                    $(this).parents('p').remove();
-                    i--;
-        }
-        return false;
+        
+       	$('#remove_product').live('click', function() { 
+            if( i > 1) {
+                $('#tab_product_'+i).hide();
+            	i--;
+        	}
         });
+
+
+
+        
 });
 
-/*$('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
-  var target = $(e.target).attr("href") // activated tab
-  i = target.replace('#product_','');
-  //alert(i);
-});*/
-
-/*var activeTab = null;
-$('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
-
-  activeTab = e.target;
-  alert(activeTab);
-})*/
-
-/*$(document).ready(function(){
-    $('a[data-toggle="tab"]').click(function(){
-        alert("The paragraph was clicked.");
-    });
-});*/
 $(this).ready( function() { 
 
             $("#pro_search_1").autocomplete({  
@@ -942,113 +949,6 @@ $(this).ready( function() {
          });
 
 
-$(document).ready(function() {
- 	var iCnt = 0; 
- 	var container = $(document.createElement('div')).css({padding: '5px', margin: '20px', width: '200px',overflow: 'hidden', border: '1px dashed',borderTopColor: '#999', borderBottomColor: '#999',borderLeftColor: '#999', borderRightColor: '#999', font: '13px verdana'});
- 	$('#btAdd').click(function() { 
- 		if (iCnt <= 19) {
- 			iCnt = iCnt + 2; 
- 			$('#products_tab').append('<li><a data-toggle="tab" href="#product_'+iCnt+'" id="product_'+iCnt+'">Producto '+iCnt+'</a></li>'); 
- 			if (iCnt == 1) { 
- 				var divSubmit = $(document.createElement('div')); 
- 				$(divSubmit).append('<input type=button class="bt" onclick="GetTextValue()" id=btSubmit value=Submit />'); 
- 			} 
- 			$('#main').after(container, divSubmit);
- 		} else {
- 			$(container).append('<label>Reached the limit</label>'); 
- 			$('#btAdd').attr('class', 'bt-disable'); 
- 			$('#btAdd').attr('disabled', 'disabled');
- 		}
- 	});
 
- 	$('#btRemove').click(function() {
- 		if (iCnt != 0) { 
- 			$('#tb' + iCnt).remove(); 
- 			iCnt = iCnt - 1; 
- 		} 
- 		if (iCnt == 0) { 
- 			$(container).empty(); 
- 			$(container).remove(); 
- 			$('#btSubmit').remove(); 
- 			$('#btAdd').removeAttr('disabled'); 
- 			$('#btAdd').attr('class', 'bt') 
- 		}
- 	});
-
- 	$('#btRemoveAll').click(function() {
- 		$(container).empty(); 
- 		$(container).remove(); 
- 		$('#btSubmit').remove(); 
- 		iCnt = 0; 
- 		$('#btAdd').removeAttr('disabled'); 
- 		$('#btAdd').attr('class', 'bt');
- 	});
- });
-
-var divValue, values = ''; 
-
-function GetTextValue() {
-	$(divValue).empty(); 
-	$(divValue).remove(); 
-	values = ''; 
-	$('.input').each(function() { 
-		divValue = $(document.createElement('div')).css({padding: '5px', width: '200px'}); values += this.value + '<br />'});
-	$(divValue).append('<p><b>Your selected values</b></p>' + values);$('#showvalues').append(divValue);
-}
-
-
- /*$(document).ready(function() {
- 	var iCnt = 0; 
- 	var container = $(document.createElement('div')).css({padding: '5px', margin: '20px', width: '200px',overflow: 'hidden', border: '1px dashed',borderTopColor: '#999', borderBottomColor: '#999',borderLeftColor: '#999', borderRightColor: '#999', font: '13px verdana'});
- 	$('#btAdd').click(function() { 
- 		if (iCnt <= 19) {
- 			iCnt = iCnt + 1; 
- 			$(container).append('<input type=text class="input" id=tb' + iCnt + ' value="Text Element ' + iCnt + '" />'); 
- 			if (iCnt == 1) { 
- 				var divSubmit = $(document.createElement('div')); 
- 				$(divSubmit).append('<input type=button class="bt" onclick="GetTextValue()" id=btSubmit value=Submit />'); 
- 			} 
- 			$('#main').after(container, divSubmit);
- 		} else {
- 			$(container).append('<label>Reached the limit</label>'); 
- 			$('#btAdd').attr('class', 'bt-disable'); 
- 			$('#btAdd').attr('disabled', 'disabled');
- 		}
- 	});
-
- 	$('#btRemove').click(function() {
- 		if (iCnt != 0) { 
- 			$('#tb' + iCnt).remove(); 
- 			iCnt = iCnt - 1; 
- 		} 
- 		if (iCnt == 0) { 
- 			$(container).empty(); 
- 			$(container).remove(); 
- 			$('#btSubmit').remove(); 
- 			$('#btAdd').removeAttr('disabled'); 
- 			$('#btAdd').attr('class', 'bt') 
- 		}
- 	});
-
- 	$('#btRemoveAll').click(function() {
- 		$(container).empty(); 
- 		$(container).remove(); 
- 		$('#btSubmit').remove(); 
- 		iCnt = 0; 
- 		$('#btAdd').removeAttr('disabled'); 
- 		$('#btAdd').attr('class', 'bt');
- 	});
- });
-
-var divValue, values = ''; 
-
-function GetTextValue() {
-	$(divValue).empty(); 
-	$(divValue).remove(); 
-	values = ''; 
-	$('.input').each(function() { 
-		divValue = $(document.createElement('div')).css({padding: '5px', width: '200px'}); values += this.value + '<br />'});
-	$(divValue).append('<p><b>Your selected values</b></p>' + values);$('#showvalues').append(divValue);
-}*/
 
 </script>

@@ -123,7 +123,7 @@ class Orders extends SB_Controller
 	
 		$this->data['id'] = $id;
 		$this->data['operadores'] = $this->db->get_where('tb_users', array('group_id' => '5'));
-		$flores_db = $this->load->database('800flores', TRUE);
+		
 		$this->data['content'] = $this->load->view('orders/form',$this->data, true );		
 	  	$this->load->view('layouts/main', $this->data );
 	
@@ -249,4 +249,104 @@ class Orders extends SB_Controller
         }
         print $return;
     }
+
+     /*public function get_shipping_zones_prices($product_id) {
+    	$query = $this->products_colorsmodel->get_product_colors($product_id); // search product colors
+        $return = "<option value=''>-- Please Select --</option>\n";	
+        foreach( $query as $row ) {
+        	$value = $row->id_color;
+    		$text  = $row->color;
+    		$return .= "<option value='$value'>$text</option>\n";
+        }
+        print $return;
+    }
+
+    /*function precio_dolar($precio) {
+
+    	$flores_db = $this->load->database('800flores', TRUE);
+	   	$query = $flores_db->query("SELECT T16_precio_dolar FROM T16_parametros");
+
+		$ret=0;
+		if ($query->num_rows() > 0) {
+			foreach ($query->result() as $row)
+		    {
+		        $tmp = $row->T16_precio_dolar;
+				if ($tmp!=0) {
+					$ret = ($precio / $tmp);
+					$ret = round($ret, 2);
+				}
+		    }		
+		}
+		return $ret;
+	}
+
+    function destinos_costos($CHILE='SI',$id_localidad=0,$id_zona=0){
+	    if($CHILE!='SI' && $CHILE!='NO'){
+	    	$CHILE='SI';		
+	   	}
+	   	$Select="<select name=\"T20_id_localidad".$CHILE."\" class=\"TextField\" onChange=\"javascript:CambiaDestino(this.form)\"  >";
+
+	   	$flores_db = $this->load->database('800flores', TRUE);
+	   	$query = $flores_db->query("SELECT T22_id_zona, T22_zona, T22_chile, T22_precio FROM T22_zona ORDER BY T22_id_zona");		
+       
+	    $Selected='';
+	    if($CHILE=='NO') $blanco1=true; else $blanco1=false;
+	    $blanco="";
+
+	    foreach ($query->result() as $row) {	    	
+
+		    $precio2 = $row->T22_precio;
+			$precio = "$" . number_format($row->T22_precio,0,",",".");
+			$query2 = $flores_db->query("SELECT T20_id_localidad, T22_id_zona, T20_localidad FROM T20_localidades WHERE T22_id_zona='$row->T22_id_zona' ORDER BY T20_localidad ASC");		
+			 
+			$num_rows = $query2->num_rows();
+			$Selected='';
+			$blanco='';
+			
+			if ($num_rows==0) {
+				$row->T22_zona = strtoupper($row->T22_zona);
+				$row->T22_zona.=" ($precio US\$".$this->precio_dolar($precio2).")";
+				$value = $row->T22_precio;
+				if ($id_zona == $row->T22_id_zona) { $Selected = 'selected'; }
+			 } else {
+			 	$blanco = "<option value=\"\"></option>";
+				$row->T22_zona = "*-------- ".strtoupper($row->T22_zona)." --------*";
+				$value='';				
+			 }
+			 if ($row->T22_chile == $CHILE) {
+			 	if ($blanco1) {
+				$Select.="<option value=\"\"></option>
+						 <option value=\"$value\" $Selected>$row->T22_zona</option>";
+				$blanco1 = FALSE;
+				} else {
+					$Select.=$blanco."
+						 <option value=\"$value\" $Selected>$row->T22_zona</option>";				
+				}
+			 } else {
+			 	continue;
+			 }
+			  
+			foreach ($query2->result() as $row2) { 
+				$Select.="<option value=\"".$row->T22_precio."\"";
+				 
+				 if ($id_localidad == $row2->T20_id_localidad){ 
+					$Select.=" selected "; 
+				 }
+				 $Select.=">";
+
+				 $Select.="$row2->T20_localidad&nbsp;($precio US\$".$this->precio_dolar($precio2).")</option> ";
+			}
+
+			if ($blanco != '') {
+				$Select.=$blanco;
+			}
+		}
+	   
+		$Select.="</select>";
+
+		//return $Select;
+		echo $Select;
+		/*$data['content'] = $this->load->view('orders/index',$data, true );		
+    	$this->load->view('layouts/main', $data );*/
+	/*}	*/
 }
